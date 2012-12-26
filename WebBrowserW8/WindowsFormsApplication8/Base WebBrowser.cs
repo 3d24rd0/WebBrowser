@@ -13,6 +13,7 @@ using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System.Net.NetworkInformation;
 
 namespace WindowsFormsApplication8
 {
@@ -85,10 +86,23 @@ namespace WindowsFormsApplication8
         {
             if (e.KeyCode == Keys.Enter)
             {
-                getCurrentBrowser().Navigate(Navegador.Text);
-
-            }
+                //Realizo un ping para saver si el host responde Posible opcion extra??
+                //Faltaria ajustar el ping si es posible para que sea mas corto XD
+                //Servidor caido buscado en google XD
+                Ping Pings = new Ping();
+                if (Pings.Send(getCurrentBrowser().Url.Host.ToString()).Status == IPStatus.Success)
+                {
+                    getCurrentBrowser().Navigate(Navegador.Text);
+                }
+                else
+                {
+                    getCurrentBrowser().Navigate(aBuscar(Navegador.Text));
+                }
+             }
+            
+            
         }
+
         //Recargar
         private void refresh_Click(object sender, EventArgs e)
         {
