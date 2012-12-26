@@ -39,14 +39,13 @@
             this.refresh = new System.Windows.Forms.ToolStripButton();
             this.Cancelar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.Navegador = new System.Windows.Forms.ToolStripComboBox();
             this.Go = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.Buscar = new System.Windows.Forms.ToolStripButton();
             this.newtab = new System.Windows.Forms.ToolStripButton();
             this.closeTap = new System.Windows.Forms.ToolStripButton();
             this.Navegador1 = new System.Windows.Forms.TabControl();
-            this.Navegador = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,9 +63,8 @@
             this.toolStripSeparator6,
             this.Navegador,
             this.Go,
-            this.toolStripSeparator7,
-            this.toolStripTextBox1,
             this.Buscar,
+            this.toolStripSeparator7,
             this.newtab,
             this.closeTap});
             this.toolStrip1.Location = new System.Drawing.Point(0, 466);
@@ -157,6 +155,19 @@
             this.toolStripSeparator6.Padding = new System.Windows.Forms.Padding(3);
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 29);
             // 
+            // Navegador
+            // 
+            this.Navegador.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.Navegador.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.Navegador.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Navegador.Items.AddRange(new object[] {
+            "http://www.google.es",
+            "http://www.msn.es"});
+            this.Navegador.Name = "Navegador";
+            this.Navegador.Size = new System.Drawing.Size(375, 29);
+            this.Navegador.Text = "Navegador";
+            this.Navegador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Navegador_KeyPress);
+            // 
             // Go
             // 
             this.Go.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -173,12 +184,6 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 23);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 29);
-            this.toolStripTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.toolStripTextBox1_KeyPress);
             // 
             // Buscar
             // 
@@ -222,14 +227,6 @@
             this.Navegador1.Size = new System.Drawing.Size(1359, 458);
             this.Navegador1.TabIndex = 10;
             // 
-            // Navegador
-            // 
-            this.Navegador.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.Navegador.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
-            this.Navegador.Name = "Navegador";
-            this.Navegador.Size = new System.Drawing.Size(375, 29);
-            this.Navegador.Text = "Navegador";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -263,7 +260,6 @@
         private System.Windows.Forms.ToolStripButton back;
         private System.Windows.Forms.ToolStripButton forward;
         private System.Windows.Forms.ToolStripButton HOME;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.TabControl Navegador1;
         private System.Windows.Forms.ToolStripButton newtab;
         private System.Windows.Forms.ToolStripButton closeTap;

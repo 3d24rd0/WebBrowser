@@ -78,16 +78,21 @@ namespace WindowsFormsApplication8
         //Buscar
         private void Buscar_Click(object sender, EventArgs e)
         {
-            getCurrentBrowser().Navigate("http://google.com/search?q=" + toolStripTextBox1.Text);
+            getCurrentBrowser().Navigate("http://google.com/search?q=" + Navegador1.Text);
         }
-        private void toolStripTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void Navegador_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\r')
             {
-                getCurrentBrowser().Navigate("http://google.com/search?q=" + toolStripTextBox1.Text);
+                getCurrentBrowser().Navigate(aBuscar(Navegador1.Text));
             }
-        }
+            if (e.KeyChar == 'g')
+            {
+                getCurrentBrowser().Navigate("http://google.com/search?q=" + Navegador1.Text);
+            }
 
+        }
         //Recargar
         private void refresh_Click(object sender, EventArgs e)
         {
@@ -131,6 +136,7 @@ namespace WindowsFormsApplication8
         {
             String text = getCurrentBrowser().Url.Host.ToString();
             Navegador1.SelectedTab.Text = text;
+            Navegador1.Text = getCurrentBrowser().Url.ToString();
         }
 
 
@@ -179,7 +185,17 @@ namespace WindowsFormsApplication8
             WebBrowser a = (WebBrowser)Navegador1.SelectedTab.Controls[0];
             return a;
         }
+
+        private String aBuscar(string texto) {
+            
+            String ruta= "http://google.com/search?q=+";
+            ruta +=texto;
+            return ruta;
+        }
+
         #endregion
+
+
 
 
 
