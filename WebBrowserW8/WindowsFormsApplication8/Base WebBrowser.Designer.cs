@@ -41,8 +41,8 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.Navegador = new System.Windows.Forms.ToolStripComboBox();
             this.Go = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.Buscar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.newtab = new System.Windows.Forms.ToolStripButton();
             this.closeTap = new System.Windows.Forms.ToolStripButton();
             this.Navegador1 = new System.Windows.Forms.TabControl();
@@ -158,14 +158,15 @@
             // Navegador
             // 
             this.Navegador.AutoCompleteCustomSource.AddRange(new string[] {
-            "1"});
+            "http://whatsmyuseragent.com"});
             this.Navegador.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.Navegador.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
             this.Navegador.DropDownHeight = 300;
             this.Navegador.IntegralHeight = false;
             this.Navegador.Items.AddRange(new object[] {
             "http://www.google.es",
-            "http://www.msn.es"});
+            "http://www.msn.es",
+            "http://whatsmyuseragent.com"});
             this.Navegador.Name = "Navegador";
             this.Navegador.Size = new System.Drawing.Size(375, 29);
             this.Navegador.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Navegador_KeyDown);
@@ -180,13 +181,6 @@
             this.Go.Text = "Go";
             this.Go.Click += new System.EventHandler(this.Go_Click);
             // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Margin = new System.Windows.Forms.Padding(3);
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 23);
-            // 
             // Buscar
             // 
             this.Buscar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -196,6 +190,13 @@
             this.Buscar.Size = new System.Drawing.Size(56, 26);
             this.Buscar.Text = "Buscar";
             this.Buscar.Click += new System.EventHandler(this.Buscar_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Margin = new System.Windows.Forms.Padding(3);
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 23);
             // 
             // newtab
             // 

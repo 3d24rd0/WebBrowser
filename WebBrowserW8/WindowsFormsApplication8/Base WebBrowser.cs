@@ -74,7 +74,18 @@ namespace WindowsFormsApplication8
         //Boton de ir 
         private void Go_Click(object sender, EventArgs e)
         {
-            getCurrentBrowser().Navigate(Navegador.Text);
+            //getCurrentBrowser().Navigate(Navegador.Text);
+
+            getCurrentBrowser().AccessibleDescription = "Morcilla 1.0";
+            getCurrentBrowser().AccessibleName = "Pettit Commite";
+
+            Random random = new Random();
+            int num = random.Next(32);
+            //cadena aleatoria minusculas de 32 caracteres o menos
+            string UA = "User-Agent: " + num + " Web Browser";
+           // MessageBox.Show(UA);
+            getCurrentBrowser().Navigate(Navegador.Text, "_self");
+
         }
         //Buscar
         private void Buscar_Click(object sender, EventArgs e)
@@ -138,6 +149,9 @@ namespace WindowsFormsApplication8
         {
             EliminarPestaña();
         }
+
+
+
 #endregion 
 
         #region Pestañas
