@@ -136,7 +136,7 @@ namespace WindowsFormsApplication8
         {
             String text = getCurrentBrowser().Url.Host.ToString();
             Navegador1.SelectedTab.Text = text;
-            Navegador1.Text = getCurrentBrowser().Url.ToString();
+            Navegador.Text = getCurrentBrowser().Url.ToString();
         }
 
 
@@ -149,9 +149,10 @@ namespace WindowsFormsApplication8
             Navegador1.SelectedTab = NuevaPestaña; //seleccionamos la pestaña 
             Navegador1.TabPages.Add(NuevaPestaña); //cargamos la pestaña en el control 
 
-
-            //
+            //Se crea objeto browser
             WebBrowser browser = new WebBrowser();
+            SuppressScriptErrorsOnly(browser);
+
             NuevaPestaña.Controls.Add(browser);
             browser.GoHome();
             browser.Dock = DockStyle.Fill;

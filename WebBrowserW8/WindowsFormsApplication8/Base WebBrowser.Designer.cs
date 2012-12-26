@@ -67,9 +67,9 @@
             this.toolStripSeparator7,
             this.newtab,
             this.closeTap});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 466);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 444);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1367, 29);
+            this.toolStrip1.Size = new System.Drawing.Size(1027, 29);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -157,15 +157,17 @@
             // 
             // Navegador
             // 
+            this.Navegador.AutoCompleteCustomSource.AddRange(new string[] {
+            "1"});
             this.Navegador.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.Navegador.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
-            this.Navegador.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Navegador.DropDownHeight = 300;
+            this.Navegador.IntegralHeight = false;
             this.Navegador.Items.AddRange(new object[] {
             "http://www.google.es",
             "http://www.msn.es"});
             this.Navegador.Name = "Navegador";
             this.Navegador.Size = new System.Drawing.Size(375, 29);
-            this.Navegador.Text = "Navegador";
             this.Navegador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Navegador_KeyPress);
             // 
             // Go
@@ -224,14 +226,14 @@
             this.Navegador1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Navegador1.Name = "Navegador1";
             this.Navegador1.SelectedIndex = 0;
-            this.Navegador1.Size = new System.Drawing.Size(1359, 458);
+            this.Navegador1.Size = new System.Drawing.Size(1019, 436);
             this.Navegador1.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1367, 495);
+            this.ClientSize = new System.Drawing.Size(1027, 473);
             this.Controls.Add(this.Navegador1);
             this.Controls.Add(this.toolStrip1);
             this.Margin = new System.Windows.Forms.Padding(4);
