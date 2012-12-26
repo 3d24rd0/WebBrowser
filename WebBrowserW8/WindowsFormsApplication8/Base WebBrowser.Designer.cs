@@ -39,14 +39,14 @@
             this.refresh = new System.Windows.Forms.ToolStripButton();
             this.Cancelar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.Navegador = new System.Windows.Forms.ToolStripComboBox();
             this.Go = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.Buscar = new System.Windows.Forms.ToolStripButton();
             this.newtab = new System.Windows.Forms.ToolStripButton();
             this.closeTap = new System.Windows.Forms.ToolStripButton();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.Navegador1 = new System.Windows.Forms.TabControl();
+            this.Navegador = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -157,17 +157,6 @@
             this.toolStripSeparator6.Padding = new System.Windows.Forms.Padding(3);
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 29);
             // 
-            // Navegador
-            // 
-            this.Navegador.AutoToolTip = true;
-            this.Navegador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Navegador.Items.AddRange(new object[] {
-            "http://www.Google.es",
-            "http://www.msn.es"});
-            this.Navegador.Name = "Navegador";
-            this.Navegador.Size = new System.Drawing.Size(321, 29);
-            this.Navegador.Sorted = true;
-            // 
             // Go
             // 
             this.Go.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -221,24 +210,32 @@
             this.closeTap.Text = "Eliminar pestaña";
             this.closeTap.Click += new System.EventHandler(this.closeTap_Click);
             // 
-            // tabControl1
+            // Navegador1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Navegador1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 1);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1359, 458);
-            this.tabControl1.TabIndex = 10;
+            this.Navegador1.Location = new System.Drawing.Point(0, 1);
+            this.Navegador1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Navegador1.Name = "Navegador1";
+            this.Navegador1.SelectedIndex = 0;
+            this.Navegador1.Size = new System.Drawing.Size(1359, 458);
+            this.Navegador1.TabIndex = 10;
+            // 
+            // Navegador
+            // 
+            this.Navegador.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.Navegador.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
+            this.Navegador.Name = "Navegador";
+            this.Navegador.Size = new System.Drawing.Size(375, 29);
+            this.Navegador.Text = "Navegador";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 495);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.Navegador1);
             this.Controls.Add(this.toolStrip1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
@@ -258,7 +255,6 @@
         private System.Windows.Forms.ToolStripMenuItem favoritosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem añadirToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripComboBox Navegador;
         private System.Windows.Forms.ToolStripButton Go;
         private System.Windows.Forms.ToolStripButton Buscar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
@@ -268,9 +264,10 @@
         private System.Windows.Forms.ToolStripButton forward;
         private System.Windows.Forms.ToolStripButton HOME;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl Navegador1;
         private System.Windows.Forms.ToolStripButton newtab;
         private System.Windows.Forms.ToolStripButton closeTap;
+        private System.Windows.Forms.ToolStripComboBox Navegador;
     }
 }
 

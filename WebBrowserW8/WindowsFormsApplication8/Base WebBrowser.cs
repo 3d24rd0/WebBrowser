@@ -25,12 +25,13 @@ namespace WindowsFormsApplication8
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         /* método de controlde eventos y colocará el cursor en el método en la vista Código.*/
         private void Form1_Load(object sender, EventArgs e)
         {
-            Navegador.SelectedIndex = 0; 
+            Navegador1.SelectedIndex = 0; 
            // webBrowser1.GoHome();
             //Llamo para quitar menssages de error/acceso de javascript
            // SuppressScriptErrorsOnly(webBrowser1);
@@ -128,10 +129,8 @@ namespace WindowsFormsApplication8
 
         private void WebBrowser_completa(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            String text = "Blank Page";
-            text = getCurrentBrowser().Url.Host.ToString();
-            tabControl1.SelectedTab.Text = text;
-            
+            String text = getCurrentBrowser().Url.Host.ToString();
+            Navegador1.SelectedTab.Text = text;
         }
 
 
@@ -141,8 +140,8 @@ namespace WindowsFormsApplication8
             TabPage NuevaPestaña = new TabPage("Nueva Pestaña ");
             ContarPestaña++; //variable que lleva el control de la cantidad de pestaña creada
             ListaPestaña.Add(NuevaPestaña);
-            tabControl1.SelectedTab = NuevaPestaña; //seleccionamos la pestaña 
-            tabControl1.TabPages.Add(NuevaPestaña); //cargamos la pestaña en el control 
+            Navegador1.SelectedTab = NuevaPestaña; //seleccionamos la pestaña 
+            Navegador1.TabPages.Add(NuevaPestaña); //cargamos la pestaña en el control 
 
 
             //
@@ -161,7 +160,7 @@ namespace WindowsFormsApplication8
                 //ListaPestaña.Remove(tabControl1.SelectedTab);
                 //tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                // ContarPestaña--;
-                tabControl1.TabPages.RemoveAt(tabControl1.SelectedIndex);
+                Navegador1.TabPages.RemoveAt(Navegador1.SelectedIndex);
                // browserTabControl.TabPages.RemoveAt(browserTabControl.SelectedIndex);
             }
             else
@@ -177,15 +176,12 @@ namespace WindowsFormsApplication8
         #region tools
         private WebBrowser getCurrentBrowser()
         {
-            WebBrowser a = (WebBrowser)tabControl1.SelectedTab.Controls[0];
+            WebBrowser a = (WebBrowser)Navegador1.SelectedTab.Controls[0];
             return a;
         }
         #endregion
 
-        private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
 
-        }
 
     }
 }
