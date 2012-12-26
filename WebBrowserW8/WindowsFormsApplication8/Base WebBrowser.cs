@@ -78,20 +78,16 @@ namespace WindowsFormsApplication8
         //Buscar
         private void Buscar_Click(object sender, EventArgs e)
         {
-            getCurrentBrowser().Navigate("http://google.com/search?q=" + Navegador1.Text);
+            getCurrentBrowser().Navigate(aBuscar(Navegador.Text));
         }
-
-        private void Navegador_KeyPress(object sender, KeyPressEventArgs e)
+        // Cuando se pulsa un linea.
+        private void Navegador_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == '\r')
+            if (e.KeyCode == Keys.Enter)
             {
-                getCurrentBrowser().Navigate(aBuscar(Navegador1.Text));
-            }
-            if (e.KeyChar == 'g')
-            {
-                getCurrentBrowser().Navigate("http://google.com/search?q=" + Navegador1.Text);
-            }
+                getCurrentBrowser().Navigate(Navegador.Text);
 
+            }
         }
         //Recargar
         private void refresh_Click(object sender, EventArgs e)
@@ -195,6 +191,8 @@ namespace WindowsFormsApplication8
         }
 
         #endregion
+
+
 
 
 

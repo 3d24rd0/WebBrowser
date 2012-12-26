@@ -168,7 +168,7 @@
             "http://www.msn.es"});
             this.Navegador.Name = "Navegador";
             this.Navegador.Size = new System.Drawing.Size(375, 29);
-            this.Navegador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Navegador_KeyPress);
+            this.Navegador.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Navegador_KeyDown);
             // 
             // Go
             // 
