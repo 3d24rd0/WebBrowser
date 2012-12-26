@@ -12,12 +12,16 @@ using System.Web;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace WindowsFormsApplication8
 {
 
     public partial class Form1 : Form
     {
+        ArrayList ListaPestaña = new ArrayList();
+        int ContarPestaña = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,10 +31,12 @@ namespace WindowsFormsApplication8
         private void Form1_Load(object sender, EventArgs e)
         {
             Navegador.SelectedIndex = 0; 
-            webBrowser1.GoHome();
+           // webBrowser1.GoHome();
             //Llamo para quitar menssages de error/acceso de javascript
-            SuppressScriptErrorsOnly(webBrowser1);
+           // SuppressScriptErrorsOnly(webBrowser1);
+            CrearPestaña();
         }
+
 
         //Esta parte del codigo oculta los errores de scripts sin ocultar el resto de scripts.
         //Se llama con SuppressScriptErrorsOnly(webBrowser1); Actualmente lo llamos desde form1_load
@@ -66,71 +72,120 @@ namespace WindowsFormsApplication8
         //Boton de ir 
         private void Go_Click(object sender, EventArgs e)
         {
-            webBrowser1.Navigate(Navegador.Text);
+            getCurrentBrowser().Navigate(Navegador.Text);
         }
         //Buscar
         private void Buscar_Click(object sender, EventArgs e)
         {
-            webBrowser1.Navigate("http://google.com/search?q=" + toolStripTextBox1.Text);
+            getCurrentBrowser().Navigate("http://google.com/search?q=" + toolStripTextBox1.Text);
         }
         private void toolStripTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\r')
             {
-                webBrowser1.Navigate("http://google.com/search?q=" + toolStripTextBox1.Text);
+                getCurrentBrowser().Navigate("http://google.com/search?q=" + toolStripTextBox1.Text);
             }
         }
 
         //Recargar
         private void refresh_Click(object sender, EventArgs e)
         {
-            webBrowser1.Refresh();
+            getCurrentBrowser().Refresh();
         }
         //Stop
         private void Cancelar_Click(object sender, EventArgs e)
         {
-            webBrowser1.Stop();
+            getCurrentBrowser().Stop();
         }
         //Botone Atras
         private void back_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoBack();
+            getCurrentBrowser().GoBack();
         }
 
         //Boton Alante
         private void forward_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoForward();
+            getCurrentBrowser().GoForward();
         }
         //Boton Home
         private void HOME_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoHome();
+            getCurrentBrowser().GoHome();
+        }
+        private void newtab_Click(object sender, EventArgs e)
+        {
+            CrearPestaña();
+        }
+
+        private void closeTap_Click(object sender, EventArgs e)
+        {
+            EliminarPestaña();
         }
 #endregion 
 
-        /*Convoca el Formulario de Favoritos*/
-        private void añadirFavoritosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormFavoritos frm = new FormFavoritos();
+        #region Pestañas
 
-            frm.Show();
+        private void WebBrowser_completa(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            String text = "Blank Page";
+            text = getCurrentBrowser().Url.Host.ToString();
+            tabControl1.SelectedTab.Text = text;
+            
         }
 
 
+        private void CrearPestaña()
+        {
+
+            TabPage NuevaPestaña = new TabPage("Nueva Pestaña ");
+            ContarPestaña++; //variable que lleva el control de la cantidad de pestaña creada
+            ListaPestaña.Add(NuevaPestaña);
+            tabControl1.SelectedTab = NuevaPestaña; //seleccionamos la pestaña 
+            tabControl1.TabPages.Add(NuevaPestaña); //cargamos la pestaña en el control 
 
 
+            //
+            WebBrowser browser = new WebBrowser();
+            NuevaPestaña.Controls.Add(browser);
+            browser.GoHome();
+            browser.Dock = DockStyle.Fill;
+            browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(WebBrowser_completa);
 
 
+        }
+        private void EliminarPestaña()
+        {
+            if (ContarPestaña != 1)
+            {
+                //ListaPestaña.Remove(tabControl1.SelectedTab);
+                //tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+               // ContarPestaña--;
+                tabControl1.TabPages.RemoveAt(tabControl1.SelectedIndex);
+               // browserTabControl.TabPages.RemoveAt(browserTabControl.SelectedIndex);
+            }
+            else
+            {
+                Close();
+            }
 
 
+        }
 
+        #endregion
 
+        #region tools
+        private WebBrowser getCurrentBrowser()
+        {
+            WebBrowser a = (WebBrowser)tabControl1.SelectedTab.Controls[0];
+            return a;
+        }
+        #endregion
 
+        private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
 
-
-
-
+        }
 
     }
 }
