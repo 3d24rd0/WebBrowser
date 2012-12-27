@@ -202,6 +202,7 @@ namespace WindowsFormsApplication8
             // Display an error message to the user.
             //Muestro informacion en el laber estado
             Estado.Text = "Error :" + e.StatusCode.ToString(); 
+
             /*
             MessageBox.Show("Cannot navigate to " + e.Url);
             if (e.StatusCode.ToString() == "404")
@@ -248,8 +249,9 @@ namespace WindowsFormsApplication8
                 //Faltaria ajustar el ping si es posible para que sea mas corto XD
                 //Servidor caido buscado en google XD
                 Estado.Text = "Que operación Realizo"; 
-                Ping Pings = new Ping();
-                if (Pings.Send(getCurrentBrowser().Url.Host.ToString()).Status == IPStatus.Success)
+
+                string url = Navegador.ToString();
+                if ((url.StartsWith("http://") || url.StartsWith("https://")))
                 {
                     Estado.Text = "Accediendo"; 
                     getCurrentBrowser().Navigate(Navegador.Text);
@@ -328,9 +330,10 @@ namespace WindowsFormsApplication8
             wb.ScriptErrorsSuppressed = false;
             wb.NavigateError += new WebBrowserNavigateErrorEventHandler(wb_NavigateError);//Control de errores 
             wb.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(wb_completa);// ebento que se ejequta al terminar de cargar la pagina
-
-
+     
             wb.Navigate(Home);
+
+
 
         }
 
@@ -362,7 +365,7 @@ namespace WindowsFormsApplication8
         #region tools
         private WebBrowser getCurrentBrowser()
         {
-            WebBrowser a = (WebBrowser)Navegador1.SelectedTab.Controls[0];
+            WebBrowser2 a = (WebBrowser2)Navegador1.SelectedTab.Controls[0];
             return a;
         }
 
