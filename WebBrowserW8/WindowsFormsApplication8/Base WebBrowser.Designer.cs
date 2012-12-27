@@ -46,6 +46,9 @@
             this.newtab = new System.Windows.Forms.ToolStripButton();
             this.closeTap = new System.Windows.Forms.ToolStripButton();
             this.Navegador1 = new System.Windows.Forms.TabControl();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.Estado = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +57,9 @@
             this.toolStrip1.BackColor = System.Drawing.SystemColors.MenuBar;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Estado,
+            this.toolStripLabel1,
+            this.toolStripSeparator1,
             this.toolStripDropDownButton1,
             this.HOME,
             this.back,
@@ -69,7 +75,7 @@
             this.closeTap});
             this.toolStrip1.Location = new System.Drawing.Point(0, 444);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1027, 29);
+            this.toolStrip1.Size = new System.Drawing.Size(1214, 29);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -227,14 +233,34 @@
             this.Navegador1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Navegador1.Name = "Navegador1";
             this.Navegador1.SelectedIndex = 0;
-            this.Navegador1.Size = new System.Drawing.Size(1019, 436);
+            this.Navegador1.Size = new System.Drawing.Size(1206, 436);
             this.Navegador1.TabIndex = 10;
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(57, 26);
+            this.toolStripLabel1.Text = "Estado:";
+            // 
+            // Estado
+            // 
+            this.Estado.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Estado.Name = "Estado";
+            this.Estado.Size = new System.Drawing.Size(23, 26);
+            this.Estado.Text = "¿?";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 29);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1027, 473);
+            this.ClientSize = new System.Drawing.Size(1214, 473);
             this.Controls.Add(this.Navegador1);
             this.Controls.Add(this.toolStrip1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -267,6 +293,9 @@
         private System.Windows.Forms.ToolStripButton newtab;
         private System.Windows.Forms.ToolStripButton closeTap;
         private System.Windows.Forms.ToolStripComboBox Navegador;
+        private System.Windows.Forms.ToolStripLabel Estado;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

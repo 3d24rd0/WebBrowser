@@ -168,8 +168,13 @@ namespace WindowsFormsApplication8
 
         //Algunos eventos dependen del complemento
         #region eventos del webbrouser
+        //Evento cuando se completa
         private void wb_completa(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+
+            //Muestro informacion en el laber estado
+           // Estado.Text = "Completado"; ********************************* Temporal
+
             //Damos el nombre a las pestañas
             String text = getCurrentBrowser().Url.Host.ToString();
             Navegador1.SelectedTab.Text = text;
@@ -184,13 +189,20 @@ namespace WindowsFormsApplication8
         {
             // Ignore the error and suppress the error dialog box. 
             e.Handled = true;
-            MessageBox.Show("Suppressed error!");
+           // MessageBox.Show("Suppressed error!");
+
+            //Muestro informacion en el laber estado
+            Estado.Text = "Suppressed error!"; 
+
             //Ultima informacion encontrada sobre este error
             //http://msdn.microsoft.com/es-es/library/vstudio/system.windows.forms.htmlelementerroreventargs.handled(v=vs.100).aspx
         }
         private void wb_NavigateError(object sender, WebBrowserNavigateErrorEventArgs e)
         {
             // Display an error message to the user.
+            //Muestro informacion en el laber estado
+            Estado.Text = "Error :" + e.StatusCode.ToString(); 
+            /*
             MessageBox.Show("Cannot navigate to " + e.Url);
             if (e.StatusCode.ToString() == "404")
             {
@@ -198,6 +210,7 @@ namespace WindowsFormsApplication8
             }
             //Lista de errores ¿Creamos IF?
             //http://msdn.microsoft.com/en-us/library/bb268233.aspx
+             * */
         }
         #endregion
 
@@ -205,6 +218,7 @@ namespace WindowsFormsApplication8
         //Boton de ir 
         private void Go_Click(object sender, EventArgs e)
         {
+            Estado.Text = "Accediendo"; 
             //getCurrentBrowser().Navigate(Navegador.Text);
 
             getCurrentBrowser().AccessibleDescription = "Morcilla 1.0";
@@ -221,23 +235,28 @@ namespace WindowsFormsApplication8
         //Buscar
         private void Buscar_Click(object sender, EventArgs e)
         {
+            Estado.Text = "Buscando"; 
             getCurrentBrowser().Navigate(aBuscar(Navegador.Text));
         }
         // Cuando se pulsa un linea.
         private void Navegador_KeyDown(object sender, KeyEventArgs e)
         {
+            Estado.Text = "Escribiendo"; 
             if (e.KeyCode == Keys.Enter)
             {
                 //Realizo un ping para saver si el host responde Posible opcion extra??
                 //Faltaria ajustar el ping si es posible para que sea mas corto XD
                 //Servidor caido buscado en google XD
+                Estado.Text = "Que operación Realizo"; 
                 Ping Pings = new Ping();
                 if (Pings.Send(getCurrentBrowser().Url.Host.ToString()).Status == IPStatus.Success)
                 {
+                    Estado.Text = "Accediendo"; 
                     getCurrentBrowser().Navigate(Navegador.Text);
                 }
                 else
                 {
+                    Estado.Text = "Buscando"; 
                     getCurrentBrowser().Navigate(aBuscar(Navegador.Text));
                 }
              }
@@ -248,27 +267,32 @@ namespace WindowsFormsApplication8
         //Recargar
         private void refresh_Click(object sender, EventArgs e)
         {
+            Estado.Text = "Loading..."; 
             getCurrentBrowser().Refresh();
         }
         //Stop
         private void Cancelar_Click(object sender, EventArgs e)
         {
+            Estado.Text = "Stop"; 
             getCurrentBrowser().Stop();
         }
         //Botone Atras
         private void back_Click(object sender, EventArgs e)
         {
+            Estado.Text = "Recargando"; 
             getCurrentBrowser().GoBack();
         }
 
         //Boton Alante
         private void forward_Click(object sender, EventArgs e)
         {
+            Estado.Text = "Accediendo"; 
             getCurrentBrowser().GoForward();
         }
         //Boton Home
         private void HOME_Click(object sender, EventArgs e)
         {
+            Estado.Text = "Home"; 
             getCurrentBrowser().Navigate(Home);
         }
         private void newtab_Click(object sender, EventArgs e)
@@ -289,7 +313,8 @@ namespace WindowsFormsApplication8
 
         private void CrearPestaña()
         {
-
+            Estado.Text = "New Tab";
+ 
             TabPage newtab = new TabPage("Nueva Pestaña ");
             ContarPestaña++; //variable que lleva el control de la cantidad de pestaña creada
             ListaPestaña.Add(newtab);
@@ -313,8 +338,10 @@ namespace WindowsFormsApplication8
 
         private void EliminarPestaña()
         {
+
             if (ContarPestaña != 1)
             {
+                Estado.Text = "Close Tab";
                 //ListaPestaña.Remove(tabControl1.SelectedTab);
                 //tabControl1.TabPages.Remove(tabControl1.SelectedTab);
                 ContarPestaña--;
@@ -323,6 +350,7 @@ namespace WindowsFormsApplication8
             }
             else
             {
+                Estado.Text = "Exit";
                 Close();
             }
 
@@ -339,7 +367,7 @@ namespace WindowsFormsApplication8
         }
 
         private String aBuscar(string texto) {
-            
+            Estado.Text = "Eligiendo motor de busqueda";
             String ruta= "http://google.com/search?q=+";
             ruta +=texto;
             return ruta;
