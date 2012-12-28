@@ -30,7 +30,6 @@ namespace WindowsFormsApplication8
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         /* método de controlde eventos y colocará el cursor en el método en la vista Código.*/
