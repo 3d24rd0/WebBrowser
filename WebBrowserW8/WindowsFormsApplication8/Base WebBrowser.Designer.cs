@@ -30,7 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.Estado = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.cookiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.C_RemoveAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.vercookies = new System.Windows.Forms.ToolStripMenuItem();
             this.favoritosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.añadirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HOME = new System.Windows.Forms.ToolStripButton();
@@ -46,9 +51,7 @@
             this.newtab = new System.Windows.Forms.ToolStripButton();
             this.closeTap = new System.Windows.Forms.ToolStripButton();
             this.Navegador1 = new System.Windows.Forms.TabControl();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.Estado = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cierraLasSesionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +61,6 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Estado,
-            this.toolStripLabel1,
             this.toolStripSeparator1,
             this.toolStripDropDownButton1,
             this.HOME,
@@ -79,11 +81,25 @@
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // Estado
+            // 
+            this.Estado.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.Estado.Name = "Estado";
+            this.Estado.Size = new System.Drawing.Size(54, 26);
+            this.Estado.Text = "Estado";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 29);
+            // 
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cookiesToolStripMenuItem,
             this.favoritosToolStripMenuItem1});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -91,12 +107,36 @@
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(111, 26);
             this.toolStripDropDownButton1.Text = "Herramientas";
             // 
+            // cookiesToolStripMenuItem
+            // 
+            this.cookiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.C_RemoveAll,
+            this.vercookies,
+            this.cierraLasSesionesToolStripMenuItem});
+            this.cookiesToolStripMenuItem.Name = "cookiesToolStripMenuItem";
+            this.cookiesToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.cookiesToolStripMenuItem.Text = "Cookies";
+            // 
+            // C_RemoveAll
+            // 
+            this.C_RemoveAll.Name = "C_RemoveAll";
+            this.C_RemoveAll.Size = new System.Drawing.Size(198, 24);
+            this.C_RemoveAll.Text = "Remobe all files";
+            this.C_RemoveAll.Click += new System.EventHandler(this.C_RemoveAll_Click);
+            // 
+            // vercookies
+            // 
+            this.vercookies.Name = "vercookies";
+            this.vercookies.Size = new System.Drawing.Size(198, 24);
+            this.vercookies.Text = "Ver All";
+            this.vercookies.Click += new System.EventHandler(this.vercookies_Click);
+            // 
             // favoritosToolStripMenuItem1
             // 
             this.favoritosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.añadirToolStripMenuItem});
             this.favoritosToolStripMenuItem1.Name = "favoritosToolStripMenuItem1";
-            this.favoritosToolStripMenuItem1.Size = new System.Drawing.Size(138, 24);
+            this.favoritosToolStripMenuItem1.Size = new System.Drawing.Size(152, 24);
             this.favoritosToolStripMenuItem1.Text = "Favoritos";
             // 
             // añadirToolStripMenuItem
@@ -236,25 +276,12 @@
             this.Navegador1.Size = new System.Drawing.Size(1206, 436);
             this.Navegador1.TabIndex = 10;
             // 
-            // toolStripLabel1
+            // cierraLasSesionesToolStripMenuItem
             // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(57, 26);
-            this.toolStripLabel1.Text = "Estado:";
-            // 
-            // Estado
-            // 
-            this.Estado.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.Estado.Name = "Estado";
-            this.Estado.Size = new System.Drawing.Size(23, 26);
-            this.Estado.Text = "¿?";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 29);
+            this.cierraLasSesionesToolStripMenuItem.Name = "cierraLasSesionesToolStripMenuItem";
+            this.cierraLasSesionesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.cierraLasSesionesToolStripMenuItem.Text = "Cierra las sesiones";
+            this.cierraLasSesionesToolStripMenuItem.Click += new System.EventHandler(this.cierraLasSesionesToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -294,8 +321,11 @@
         private System.Windows.Forms.ToolStripButton closeTap;
         private System.Windows.Forms.ToolStripComboBox Navegador;
         private System.Windows.Forms.ToolStripLabel Estado;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem cookiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem C_RemoveAll;
+        private System.Windows.Forms.ToolStripMenuItem vercookies;
+        private System.Windows.Forms.ToolStripMenuItem cierraLasSesionesToolStripMenuItem;
     }
 }
 

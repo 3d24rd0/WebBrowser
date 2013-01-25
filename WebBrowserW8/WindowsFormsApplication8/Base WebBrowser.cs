@@ -18,24 +18,29 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
+
 namespace WindowsFormsApplication8
 {
     public partial class Form1 : Form
     {
         ArrayList ListaPestaña = new ArrayList();
         int ContarPestaña = 0;
+        ArrayList web_brousers = new ArrayList();
+
         //Abra que guardar en xml ??
         String Home = "www.google.es";
+        int CookiesNot = 0;
+        string[] Cookies = System.IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Cookies));
 
         public Form1()
         {
             InitializeComponent();
+
         }
 
-        /* método de controlde eventos y colocará el cursor en el método en la vista Código.*/
         private void Form1_Load(object sender, EventArgs e)
         {
-            Navegador1.SelectedIndex = 0; 
+            Navegador1.SelectedIndex = 0;
             CrearPestaña();
         }
 
@@ -171,8 +176,8 @@ namespace WindowsFormsApplication8
         private void wb_completa(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
 
-            //Muestro informacion en el laber estado
-           // Estado.Text = "Completado"; ********************************* Temporal
+            //Muestro informacion en el label estado
+            // Estado.Text = "Completado"; ********************************* Temporal
 
             //Damos el nombre a las pestañas
             String text = getCurrentBrowser().Url.Host.ToString();
@@ -188,10 +193,8 @@ namespace WindowsFormsApplication8
         {
             // Ignore the error and suppress the error dialog box. 
             e.Handled = true;
-           // MessageBox.Show("Suppressed error!");
-
-            //Muestro informacion en el laber estado
-            Estado.Text = "Suppressed error!"; 
+            //Muestro informacion en el label estado
+            Estado.Text = "Suppressed error!";
 
             //Ultima informacion encontrada sobre este error
             //http://msdn.microsoft.com/es-es/library/vstudio/system.windows.forms.htmlelementerroreventargs.handled(v=vs.100).aspx
@@ -199,8 +202,8 @@ namespace WindowsFormsApplication8
         private void wb_NavigateError(object sender, WebBrowserNavigateErrorEventArgs e)
         {
             // Display an error message to the user.
-            //Muestro informacion en el laber estado
-            Estado.Text = "Error :" + e.StatusCode.ToString(); 
+            //Muestro informacion en el label estado
+            Estado.Text = "Error :" + e.StatusCode.ToString();
 
             /*
             MessageBox.Show("Cannot navigate to " + e.Url);
@@ -218,82 +221,81 @@ namespace WindowsFormsApplication8
         //Boton de ir 
         private void Go_Click(object sender, EventArgs e)
         {
-            Estado.Text = "Accediendo"; 
+            Estado.Text = "Accediendo";
             //getCurrentBrowser().Navigate(Navegador.Text);
 
-            getCurrentBrowser().AccessibleDescription = "Morcilla 1.0";
-            getCurrentBrowser().AccessibleName = "Pettit Commite";
+            getCurrentBrowser().AccessibleDescription = "Webbrouser 1.0";
+            getCurrentBrowser().AccessibleName = "brouser";
             ///En pruebas ****************
             Random random = new Random();
             int num = random.Next(32);
             //cadena aleatoria minusculas de 32 caracteres o menos
             string UA = "User-Agent: " + num + " Web Browser";
-           // MessageBox.Show(UA);
+            // MessageBox.Show(UA);
             getCurrentBrowser().Navigate(Navegador.Text, "_self", null, UA);
 
         }
         //Buscar
         private void Buscar_Click(object sender, EventArgs e)
         {
-            Estado.Text = "Buscando"; 
+            Estado.Text = "Buscando";
             getCurrentBrowser().Navigate(aBuscar(Navegador.Text));
         }
         // Cuando se pulsa un linea.
         private void Navegador_KeyDown(object sender, KeyEventArgs e)
         {
-            Estado.Text = "Escribiendo"; 
+            Estado.Text = "Escribiendo";
             if (e.KeyCode == Keys.Enter)
             {
-                //Realizo un ping para saver si el host responde Posible opcion extra??
-                //Faltaria ajustar el ping si es posible para que sea mas corto XD
-                //Servidor caido buscado en google XD
-                Estado.Text = "Que operación Realizo"; 
+
+                Estado.Text = "Que operación Realizo?";
 
                 string url = Navegador.ToString();
+                //Tambien existe el url.EndsWith(.es);
                 if ((url.StartsWith("http://") || url.StartsWith("https://")))
                 {
-                    Estado.Text = "Accediendo"; 
+                    Estado.Text = "Accediendo";
                     getCurrentBrowser().Navigate(Navegador.Text);
                 }
                 else
                 {
-                    Estado.Text = "Buscando"; 
+                    Estado.Text = "Buscando";
                     getCurrentBrowser().Navigate(aBuscar(Navegador.Text));
                 }
-             }
-            
-            
+            }
+
+
         }
 
         //Recargar
         private void refresh_Click(object sender, EventArgs e)
         {
-            Estado.Text = "Loading..."; 
+            Estado.Text = "Loading...";
             getCurrentBrowser().Refresh();
         }
         //Stop
         private void Cancelar_Click(object sender, EventArgs e)
         {
-            Estado.Text = "Stop"; 
+            Estado.Text = "Stop";
             getCurrentBrowser().Stop();
         }
         //Botone Atras
         private void back_Click(object sender, EventArgs e)
         {
-            Estado.Text = "Recargando"; 
+            Estado.Text = "Recargando";
             getCurrentBrowser().GoBack();
         }
 
         //Boton Alante
         private void forward_Click(object sender, EventArgs e)
         {
-            Estado.Text = "Accediendo"; 
+            Estado.Text = "Accediendo";
             getCurrentBrowser().GoForward();
         }
         //Boton Home
         private void HOME_Click(object sender, EventArgs e)
         {
-            Estado.Text = "Home"; 
+            Estado.Text = "Home";
             getCurrentBrowser().Navigate(Home);
         }
         private void newtab_Click(object sender, EventArgs e)
@@ -306,58 +308,91 @@ namespace WindowsFormsApplication8
             EliminarPestaña();
         }
 
+        private void C_RemoveAll_Click(object sender, EventArgs e)
+        {
+            foreach (string ficherocookie in Cookies)
+               {
+                   try
+                   {
+                       //MessageBox.Show(getCurrentBrowser().Document.Cookie.Count().ToString());
+                     //  getCurrentBrowser().Document.Cookie.Remove(0, getCurrentBrowser().Document.Cookie.Count()  );
+                       //System.IO.File.Delete(ficherocookie);
+                      
+
+                       System.IO.File.Delete(Environment.SpecialFolder.Cookies.ToString());
+                   }
+                   catch 
+                   {
+                       CookiesNot += 1;
+                       MessageBox.Show(CookiesNot.ToString());
+                   }
+               }
+
+        }
+        private void vercookies_Click(object sender, EventArgs e)
+        {
+            string temp = "Cookies :";
+            foreach (string ficherocookie in Cookies)
+            {
+                try
+                {
+                    temp += "\n" + ficherocookie.ToString();
+                }
+                catch
+                {
+                    temp += "\n No se pudo leer.";
+                }
+            }
+            MessageBox.Show(temp);
 
 
-#endregion 
+
+        }
+
+
+        #endregion
 
         #region Pestañas
 
         private void CrearPestaña()
         {
-            Estado.Text = "New Tab";
- 
-            TabPage newtab = new TabPage("Nueva Pestaña ");
+            Estado.Text = "Nueva Pestaña";
+            // Creamos una nueva Pestaña
+            TabPage NuevaPestaña = new TabPage("Nueva Pestaña "); // Creamos una nueva pestaña
+            ListaPestaña.Add(NuevaPestaña); // cada pestaña creada los añadimos en un arraylist
+            Navegador1.TabPages.Add(NuevaPestaña); //cargamos la pestaña en el control
             ContarPestaña++; //variable que lleva el control de la cantidad de pestaña creada
-            ListaPestaña.Add(newtab);
-            Navegador1.SelectedTab = newtab; //seleccionamos la pestaña 
-            Navegador1.TabPages.Add(newtab); //cargamos la pestaña en el control 
+            Navegador1.SelectedTab = NuevaPestaña; //seleccionamos la pestaña 
 
             //Se crea objeto browser   
+            
             WebBrowser2 wb = new WebBrowser2();
-            newtab.Controls.Add(wb);
+            web_brousers.Add(wb);
+            NuevaPestaña.Controls.Add(wb);
             wb.Dock = DockStyle.Fill;
             wb.ScriptErrorsSuppressed = false;
             wb.NavigateError += new WebBrowserNavigateErrorEventHandler(wb_NavigateError);//Control de errores 
             wb.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(wb_completa);// ebento que se ejequta al terminar de cargar la pagina
-     
+
             wb.Navigate(Home);
-
-
-
         }
 
 
 
         private void EliminarPestaña()
         {
-
-            if (ContarPestaña != 1)
-            {
+            if(Navegador1.TabCount != 1){
                 Estado.Text = "Close Tab";
-                //ListaPestaña.Remove(tabControl1.SelectedTab);
-                //tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+                ListaPestaña.Remove(Navegador1.SelectedTab);
+                Navegador1.TabPages.Remove(Navegador1.SelectedTab);
                 ContarPestaña--;
-                Navegador1.TabPages.RemoveAt(Navegador1.SelectedIndex);
-               // browserTabControl.TabPages.RemoveAt(browserTabControl.SelectedIndex);
-            }
-            else
+            }else
             {
                 Estado.Text = "Exit";
                 Close();
             }
-
-
         }
+
 
         #endregion
 
@@ -367,22 +402,53 @@ namespace WindowsFormsApplication8
             WebBrowser2 a = (WebBrowser2)Navegador1.SelectedTab.Controls[0];
             return a;
         }
-
-        private String aBuscar(string texto) {
+        private void cierra_sesiones()
+        {
+          /*  foreach (TabPage a in ListaPestaña){
+               // MessageBox.Show("s");
+            }*/
+            foreach(WebBrowser2 wb in web_brousers){
+               wb.Navigate("javascript:void((function(){var a,b,c,e,f;f=0;a=document.cookie.split('; ');for(e=0;e<a.length&&a[e];e++){f++;for(b='.'+location.host;b;b=b.replace(/^(?:%5C.|[^%5C.]+)/,'')){for(c=location.pathname;c;c=c.replace(/.$/,'')){document.cookie=(a[e]+'; domain='+b+'; path='+c+'; expires='+new Date((new Date()).getTime()-1e11).toGMTString());}}}})())");
+               // wb.Refresh();
+            }
+        }
+        private String aBuscar(string texto)
+        {
             Estado.Text = "Eligiendo motor de busqueda";
-            String ruta= "http://google.com/search?q=+";
-            ruta +=texto;
+            String ruta = "http://google.com/search?q=+";
+            ruta += texto;
             return ruta;
+        }
+        private void Navigate(String address)
+        {
+            if (String.IsNullOrEmpty(address)) return;
+            if (address.Equals("about:blank")) return;
+            if (!address.StartsWith("http://") &&
+                !address.StartsWith("https://"))
+            {
+                address = "http://" + address;
+            }
+            try
+            {
+                getCurrentBrowser().Navigate(new Uri(address));
+            }
+            catch (System.UriFormatException)
+            {
+                return;
+            }
         }
 
         #endregion
-       
 
-
-
-
-
-
+        /// <summary>
+        /// Cierro las sesions activas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cierraLasSesionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cierra_sesiones();
+        }
 
     }
 }
