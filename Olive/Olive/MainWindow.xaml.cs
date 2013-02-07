@@ -22,6 +22,7 @@ namespace Olive
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }

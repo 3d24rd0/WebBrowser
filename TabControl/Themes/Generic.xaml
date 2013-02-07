@@ -397,13 +397,13 @@
 
 	<!-- Control Template for TabStripPlacement Top-->
 	<ControlTemplate x:Key="TabControlTabPlacementTop" TargetType="{x:Type l:TabControl}">
-		<Grid SnapsToDevicePixels="{Binding Path=SnapsToDevicePixels, RelativeSource={RelativeSource TemplatedParent}}" KeyboardNavigation.TabNavigation="Local">
+        <Grid SnapsToDevicePixels="{Binding Path=SnapsToDevicePixels, RelativeSource={RelativeSource TemplatedParent}}" KeyboardNavigation.TabNavigation="Local" >
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition x:Name="RowDefinition0" Height="Auto" />
@@ -413,7 +413,7 @@
 			<Border Grid.ColumnSpan="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"/>
 
 			<!-- Toggle button which displays a context menu with a menu item for each tab which can be used to select a tab that is not in view-->
-			<ToggleButton 
+            <ToggleButton 
                 x:Name="PART_DropDown" 
                 Height="22"
                 Width="16"
@@ -425,7 +425,7 @@
                 Visibility="{Binding IsUsingItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource _inverseBooleanConverter}}"
                 ToolTip="Display all the tabs in a menu"/>
 
-			<Button 
+            <Button 
                 x:Name="PART_NewTabButton" 
                 Grid.Column="1" 
                 Height="22"
@@ -437,14 +437,14 @@
 				Visibility="{Binding Path=AllowAddNew, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolConverter}}"
 				ToolTip="Add a New tab">
 
-				<Image Source="pack://application:,,,/Wpf.TabControl;component/Images/newtab.ico"/>
-			</Button>
+                <Image Source="pack://application:,,,/Wpf.TabControl;component/Images/newtab.ico"/>
+            </Button>
 
-			<!-- Repeat Buttons used for scrolling the TabItems into view-->
-			<RepeatButton 
+            <!-- Repeat Buttons used for scrolling the TabItems into view-->
+            <RepeatButton 
                 x:Name="PART_RepeatLeft" 
-                Panel.ZIndex="1" 
-                Grid.Column="2" 
+                Panel.ZIndex="2" 
+                Grid.Column="1" 
                 Height="22"
                 KeyboardNavigation.TabIndex="3"
                 VerticalAlignment="Bottom"
@@ -453,7 +453,7 @@
                 ToolTip="Scroll the Tab Items to the Left" 
 				Visibility="{Binding ElementName=TabPanel, Path=CanScrollLeftOrUp, Converter={StaticResource boolConverter}}"/>
 
-			<ScrollViewer x:Name="PART_ScrollViewer" Grid.Column="3" Panel.ZIndex="1" CanContentScroll="True" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+            <ScrollViewer x:Name="PART_ScrollViewer" Grid.Column="3" Panel.ZIndex="1" CanContentScroll="True" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
 				<l:TabPanel x:Name="TabPanel" IsItemsHost="True" SnapsToDevicePixels="True" />
 			</ScrollViewer>
 
@@ -515,7 +515,7 @@
                 Visibility="{Binding IsUsingItemsSource, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource _inverseBooleanConverter}}"
                 ToolTip="Display all the tabs in a menu"/>
 
-			<Button 
+            <Button 
                 x:Name="PART_NewTabButton" 
                 Grid.Row="1"
                 Grid.Column="1" 
@@ -527,10 +527,10 @@
 				Visibility="{Binding Path=AllowAddNew, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolConverter}}"
 				ToolTip="Add a New tab">
 
-				<Image Source="pack://application:,,,/Wpf.TabControl;component/Images/newtab.ico"/>
-			</Button>
+                <Image Source="pack://application:,,,/Wpf.TabControl;component/Images/newtab.ico"/>
+            </Button>
 
-			<!-- Repeat Buttons used for scrolling the TabItems into view-->
+            <!-- Repeat Buttons used for scrolling the TabItems into view-->
 			<RepeatButton 
                 x:Name="PART_RepeatLeft" 
                 Panel.ZIndex="1" 
