@@ -1,12 +1,25 @@
-﻿<Window
+﻿<Window x:Class="Olive.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Controls="clr-namespace:Wpf.Controls;assembly=Wpf.TabControl" 
-        x:Class="Olive.MainWindow"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Olive" Height="350" Width="525">
     <Grid>
-        <Controls:TabControl>
-
-        </Controls:TabControl>
+        <TabControl Name="Pestañas" ItemsSource="{Binding}" SelectionChanged="Tab_change">
+            <TabControl.Resources>
+                <!--Style colocado para el boton de las pestañas de cerrar la idea seria cambiar directamente el boton por una imagen-->
+                <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"></Style>
+                
+                <DataTemplate x:Key="Plant_tabs" DataType="TabItem">
+                    <DockPanel>
+                        <Button Name="Button_close" DockPanel.Dock="Right" Margin="5,0,0,0" Padding="0" Click="Button_Close_Click" 
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Name}" 
+                                Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}">
+                            <Image Source="/Theme/delete.gif" Height="10" Width="10" DockPanel.Dock="Right"></Image>
+                        </Button>
+                        <!--Texto de las pestañas -->
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=TabItem }, Path=Header}" />
+                    </DockPanel>
+                </DataTemplate>
+            </TabControl.Resources>
+        </TabControl>
     </Grid>
 </Window>

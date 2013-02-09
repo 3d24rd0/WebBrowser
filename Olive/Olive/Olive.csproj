@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A92B117-B0CD-4DFB-AEC6-DCAB015AF9E0}</ProjectGuid>
+    <ProjectGuid>{61D6931E-6FBE-469B-BB8F-BF261B0DE69E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Olive</RootNamespace>
@@ -91,10 +91,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TabControl\Wpf.TabControl.csproj">
-      <Project>{509d06bd-aeb6-4e92-8e5b-21188ebdbd9c}</Project>
-      <Name>Wpf.TabControl</Name>
-    </ProjectReference>
+    <Resource Include="Theme\delete.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
