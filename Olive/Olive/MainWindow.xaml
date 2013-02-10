@@ -1,12 +1,68 @@
 ﻿<Window x:Class="Olive.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Olive" Height="350" Width="525">
+        Title="Olive" Height="350" Width="525" KeyDown="Pulsateclas">
+    <Window.Resources>
+
+        <DataTemplate x:Key="Cuerpo">
+            <Grid Name="GCuerpo">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Name="Badelante" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" >
+                        <Label Name="adelante">Adelante</Label>
+                    </Button>
+                    
+                    
+                        <Grid Name="Gatras" Grid.Row="0" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        <Button Name="Batras" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="4,0,0,0">
+                            <Label Name="atras">Atras</Label>
+                        </Button>
+                            <ComboBox Grid.Column="1"/>
+                        </Grid>
+
+
+                    <TextBox    Grid.Row="0" Grid.Column="2" BorderBrush="#FF707070" Grid.ColumnSpan="2" Margin="4,0,0,0"/>
+
+                    <Button     Grid.Row="0" Grid.Column="3" Margin="301.575,4.5,24.219,10" />
+                    <ComboBox   Grid.Row="0" Grid.Column="3" Margin="75.926,4.5,10,10" Width="259.868" Background="White" BorderThickness="1"></ComboBox>
+                    <Button     Grid.Row="0" Grid.Column="3" BorderBrush="#FF707070" Margin="343.055,4.75,9.999,9.75" RenderTransformOrigin="0.188,0.339"/>
+
+                    <Button     Grid.Row="0" Grid.Column="4" Width="20" Height="20" BorderBrush="#FF707070" Margin="22.261,4.75,181.571,9.75" Grid.ColumnSpan="2"/>
+
+                    <TextBox    Grid.Row="0" Grid.Column="5" Height="20" Margin="20,4.75,75.572,9.75"/>
+                    <Button     Grid.Row="0" Grid.Column="5" Width="20" Height="20" Margin="20,4.75,156.571,9.75" />
+                    <Button     Grid.Row="0" Grid.Column="5" Width="20" Height="20" Margin="151.572,4.75,24.999,9.75" />
+                    <Button     Grid.Row="0" Grid.Column="5" Width="20" Height="20" Margin="176.572,4.75,0,9.75" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <WebBrowser Name="olive" Source="http://msdn.com"></WebBrowser>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
-        <TabControl Name="Pestañas" ItemsSource="{Binding}" SelectionChanged="Tab_change">
+        <TabControl Name="Pestañas" ItemsSource="{Binding}" SelectionChanged="Tab_change"
+                    ContentTemplate="{StaticResource ResourceKey=Cuerpo}">
             <TabControl.Resources>
-                <!--Style colocado para el boton de las pestañas de cerrar la idea seria cambiar directamente el boton por una imagen-->
-                <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"></Style>
+                <!--Style colocado para el boton de las pestañas de cerrar la idea seria cambiar directamente el boton por una imagen>
+                <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"></Style-->
                 
                 <DataTemplate x:Key="Plant_tabs" DataType="TabItem">
                     <DockPanel>

@@ -35,6 +35,8 @@ namespace Olive
                 _tabs.Add(_tab);
                 //Agregamos la primera pestaña normal
                 this.AddTabItem();
+                
+                
             }
             catch (Exception ex)
             {
@@ -55,13 +57,14 @@ namespace Olive
 
 
             //Texto de las pestañas
-            TextBox txt = new TextBox();
+        /*    TextBox txt = new TextBox();
             txt.Name = "txt";
-            tab.Content = txt;
+
+            tab.Content = lña;*/
 
             // Inserta antes de la ultima pestaña 
             _tabs.Insert(_tabs.Count - 1, tab);
-
+            
             // bind tab control
             Pestañas.DataContext = _tabs;
             // select newly added tab item
@@ -106,10 +109,50 @@ namespace Olive
             TabItem tab = Pestañas.SelectedItem as TabItem;
             if (tab == null) return;
 
-            if (tab.Equals(_tab)) //Si la pestaña seleccionada es la de añadir
+            if (tab == _tab) //Si la pestaña seleccionada es la de añadir
             {
                 AddTabItem();
             }
         }
+
+        private void Pulsateclas(object sender, KeyEventArgs e)
+        {
+
+            // Ctrl + t Crea una pestaña
+            if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.T))
+            {
+                AddTabItem();
+            }
+            //Ctrl + P Imprime 
+            if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.P))
+            {
+                PrintDialog dialog = new PrintDialog();
+
+                MessageBoxResult respuesta = MessageBox.Show("Desea imprimir ? ", "Impresión", MessageBoxButton.OKCancel);
+                if (respuesta == MessageBoxResult.OK)
+                {
+                    // Imprimir la pantalla
+                    if (dialog.ShowDialog() == true)
+                    {
+                        dialog.PrintVisual(this, "Impresión");
+                    }
+                }
+                }
+
+                //Ctrl + N Nueva ventana
+                if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.N))
+                {
+                    MainWindow window = new MainWindow();
+                    window.Show();
+
+                }
+            // Ctrl + F
+            /*  if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.N))
+              {
+                  //Encontrar alguna manera de buscar en el contenido del webbrowser.
+              }*/
+        }
+
+
     }
 }
