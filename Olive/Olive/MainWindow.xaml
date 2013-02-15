@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Olive" Height="350" Width="525" KeyDown="Pulsateclas">
     <Window.Resources>
-
         <DataTemplate x:Key="Cuerpo">
             <Grid Name="GCuerpo">
                 <Grid.RowDefinitions>
@@ -20,12 +19,11 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Button Name="Badelante" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" >
+                    <Button Name="Badelante" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" PreviewMouseLeftButtonUp="Badelante_PreviewMouseLeftButtonUp_1">
                         <Label Name="adelante">Adelante</Label>
                     </Button>
-                    
-                    
-                        <Grid Name="Gatras" Grid.Row="0" Grid.Column="1">
+
+                    <Grid Name="Gatras" Grid.Row="0" Grid.Column="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -50,15 +48,23 @@
                     <Button     Grid.Row="0" Grid.Column="5" Width="20" Height="20" Margin="151.572,4.75,24.999,9.75" />
                     <Button     Grid.Row="0" Grid.Column="5" Width="20" Height="20" Margin="176.572,4.75,0,9.75" />
                 </Grid>
-                <Grid Grid.Row="1">
-                    <WebBrowser Name="olive" Source="http://msdn.com"></WebBrowser>
+                <Grid Grid.Row="1" Name="web_brouser">
+                    
                 </Grid>
             </Grid>
         </DataTemplate>
     </Window.Resources>
     
     <Grid>
-        <TabControl Name="Pestañas" ItemsSource="{Binding}" SelectionChanged="Tab_change"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TabControl Grid.Row="0" Name="Pestañas" ItemsSource="{Binding}" 
+                    SelectionChanged="Tab_change"
+                    MouseLeftButtonUp="Pestañas_MouseLeftButtonUp"
+                    KeyUp="Pestañas_KeyUp_1"
                     ContentTemplate="{StaticResource ResourceKey=Cuerpo}">
             <TabControl.Resources>
                 <!--Style colocado para el boton de las pestañas de cerrar la idea seria cambiar directamente el boton por una imagen>
@@ -74,8 +80,16 @@
                         <!--Texto de las pestañas -->
                         <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=TabItem }, Path=Header}" />
                     </DockPanel>
+                    
                 </DataTemplate>
+                
             </TabControl.Resources>
+
+            
         </TabControl>
+        <Grid Name="navegas" Grid.Row="1">
+            
+        </Grid>
+
     </Grid>
 </Window>
