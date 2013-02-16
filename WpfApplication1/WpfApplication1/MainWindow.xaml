@@ -1,0 +1,21 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <ComboBox HorizontalAlignment="Left" Margin="145,110,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True" IsEditable="True" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Cursor="Cross" ToolTip="1" IsTabStop="True" StaysOpenOnEdit="True" Height="47" IsManipulationEnabled="True" IsTextSearchCaseSensitive="True">
+            <ComboBox.ContextMenu>
+                <ContextMenu AlternationCount="-4" DisplayMemberPath="1" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="True" IsTabStop="True" IsManipulationEnabled="True" UseLayoutRounding="False">
+                    <ContextMenu.GroupStyle>
+                        <GroupStyle/>
+                    </ContextMenu.GroupStyle>
+                    <Separator/>
+                    <Button/>
+                </ContextMenu>
+            </ComboBox.ContextMenu>
+            <ComboBox.CacheMode>
+                <BitmapCache/>
+            </ComboBox.CacheMode>
+        </ComboBox>
+    </Grid>
+</Window>

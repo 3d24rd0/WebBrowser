@@ -29,9 +29,10 @@ namespace Olive
         {
             return url;
         }
-        public void seturl(string ruta)
+        public void seturl(Uri ruta)
         {
-            this.url = new Uri(ruta, UriKind.RelativeOrAbsolute);
+            //this.url = new Uri(ruta, UriKind.RelativeOrAbsolute);
+            this.url = ruta;
         }
 
 
@@ -39,6 +40,7 @@ namespace Olive
         {
             return navegador;
         }
+
         //Propiedades
         #region propiedades
         public void goAdelante()
@@ -92,6 +94,8 @@ namespace Olive
             navegador.Navigate(url);
         }
         #endregion
+
+      
 
     }
 }

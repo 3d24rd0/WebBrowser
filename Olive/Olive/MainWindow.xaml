@@ -11,46 +11,56 @@
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    
-                    <Button Name="Badelante" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Click="Badelante_Click_1">
-                        <Label Name="adelante" >Adelante</Label>
-                    </Button>
-                   
-                    <Grid Name="Gatras" Grid.Row="0" Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Name="Batras" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="4,0,0,0" Click="Batras">
-                            <Label Name="atras">Atras</Label>
-                        </Button>
-                        <ComboBox Name="UltVisitas" Grid.Column="1"/>
-                    </Grid>
-                    
-                    <TextBox x:Name="TextoUrl" Grid.Row="0" Grid.Column="2" BorderBrush="#FF707070" Grid.ColumnSpan="2" Margin="0,0,0,0" KeyDown="TextoUrl_KeyDown" />
-                    <ComboBox x:Name="ComboFavoritos" Grid.Row="0" Grid.Column="2" BorderBrush="#FF707070" Grid.ColumnSpan="4" Margin="10,0,209,0" Panel.ZIndex="-1"></ComboBox>
-                    <Button Name="GuardaFavoritos" Grid.Row="0" Grid.Column="3" BorderBrush="#FF707070" Width="20" Click="GuardaFavoritos_Click_1" />
-                    
-                    <Grid Name="GBusca" Grid.Row="0" Grid.Column="4">
+
+
+
+                    <Grid Name="Botones" Grid.Column="0" Panel.ZIndex="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Name="Refrescar" Grid.Column="0" Width="20" BorderBrush="#FF707070" Panel.ZIndex="2" Margin="20,0,184,0" Click="Refrescar_Click_1"/>
-                        <TextBox Name="TextoBuscar" Grid.Column="0" Margin="45,0,75.572,0" KeyDown="TextoBuscar_KeyDown_1"/>
-                        <Button Name="BotonBuscar" Grid.Column="0" Width="20" RenderTransformOrigin="-0.2,1.55" Margin="45,0,159,0" Click="BotonBuscar_Click_1"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions >
+                            <Button Name="Badelante" Grid.Column="0" HorizontalAlignment="Center" Click="Badelante_Click_1">
+                                <Label Name="adelante" >Adelante</Label>
+                            </Button>
+                        <Button Name="Batras" Grid.Column="1" HorizontalAlignment="Center" Click="Batras" Panel.ZIndex="2">
+                                <Label Name="atras">Atras</Label>
+                            </Button>
+                        <ComboBox Name="UltVisitas" Grid.Column="2" Panel.ZIndex="2"/>
                     </Grid>
-                    
-                    <Grid Name="Gbutonsher" Grid.Row="0" Grid.Column="5">
+
+                    <Grid Name="Url" Grid.Column="1" Margin="10,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
-                        <Button Name="BotonHome" Grid.Column="0" Width="20" Margin="151.572,0,0,0" Click="BotonHome_Click_1"/>
-                        <Button Name="BotonHerramientas" Grid.Column="1" Width="20" Margin="196.572,0,0,0" />
+                        <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0"/>
+                        <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
+                    </Grid>
+
+
+                    <Grid Name="GBusca" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="Refrescar" Grid.Column="0" Width="20" BorderBrush="#FF707070" Panel.ZIndex="2" Click="Refrescar_Click_1" Margin="10,0,0,0"/>
+                        <TextBox Name="TextoBuscar" Grid.Column="1" KeyDown="TextoBuscar_KeyDown_1" Margin="10,0,0,0" />
+                        <Button Name="BotonBuscar" Grid.Column="2" Width="20" RenderTransformOrigin="-0.2,1.55" Click="BotonBuscar_Click_1"/>
+                    </Grid>
+                    
+                    <Grid Name="Gbutonsher" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="BotonHome" Grid.Column="0" Width="20" Click="BotonHome_Click_1" Margin="10,0,0,0"/>
+                        <Button Name="BotonHerramientas" Grid.Column="1" Width="20" Margin="10,0,0,0"/>
                     </Grid>
                     
                 </Grid>

@@ -161,10 +161,10 @@ namespace Olive
 
                 }
             // Ctrl + F
-            /*  if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.N))
+             if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.N))
               {
                   //Encontrar alguna manera de buscar en el contenido del webbrowser.              Ya ace algo con ctrl + f por defecto
-              }*/
+              }
         }
 
         #region Barra herramientas
@@ -172,9 +172,8 @@ namespace Olive
         {
             if (e.Key == Key.Enter)
             {
-                TextBox t = e.Source as TextBox;
-                Motor[Pestañas.SelectedIndex].seturl(t.Text);
-                Motor[Pestañas.SelectedIndex].goUrl();
+                ComboBox t = e.Source as ComboBox;
+                url_Working(t.Text);
             }
         }
         
@@ -182,6 +181,7 @@ namespace Olive
         private void Batras(object sender, RoutedEventArgs e)
         {
             Motor[Pestañas.SelectedIndex].goAtras();
+
         }
 
         private void Badelante_Click_1(object sender, RoutedEventArgs e)
@@ -205,13 +205,12 @@ namespace Olive
             {
                 TextBox t = e.Source as TextBox;
                 Motor[Pestañas.SelectedIndex].search(t.Text);
-                Motor[Pestañas.SelectedIndex].goUrl();
             }
         }
 
         private void BotonBuscar_Click_1(object sender, RoutedEventArgs e)
         {
-            Motor[Pestañas.SelectedIndex].FindName("google");
+           // Motor[Pestañas.SelectedIndex].FindName("google");
         }
 
         private void BotonHome_Click_1(object sender, RoutedEventArgs e)
@@ -219,5 +218,31 @@ namespace Olive
             Motor[Pestañas.SelectedIndex].goHome();
         }
         #endregion
+
+        private void url_Working(string url)
+        {
+            Uri ruta;
+            //this.Home = new Uri(Home, UriKind.RelativeOrAbsolute);
+            if (String.IsNullOrEmpty(url)) return;
+            if (url.Equals("about:blank")) return;
+            if (!url.StartsWith("http://") || !url.StartsWith("https://"))
+            {
+                ruta = new Uri("http://" + url, UriKind.RelativeOrAbsolute);
+            }
+            else
+            {
+                ruta = new Uri(url, UriKind.RelativeOrAbsolute);
+            }
+                try
+                {
+                   // webBrowser1.Navigate(new Uri(url));
+                    Motor[Pestañas.SelectedIndex].seturl(ruta);
+                }
+                catch (System.UriFormatException)
+                {
+                    return;
+                }
+            Motor[Pestañas.SelectedIndex].goUrl();
+         }
     }
 }
