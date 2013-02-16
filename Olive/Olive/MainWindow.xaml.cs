@@ -21,29 +21,20 @@ namespace Olive
         private TabItem _tab;//Pestaña de añadir mas pestañas
         private int ID_Pest = 0; //Necesario id para cerrar pestañas debe de ser un valor unico sin posivilidad de repetir.
       
-        public string comment_text1 = "http://www.google.es";
-        private Navegacion[] list = new Navegacion[3];
-        Navegacion motor;
+        private Navegacion[] Motor = new Navegacion[30];
 
         public MainWindow()
         {
             try{
                 InitializeComponent();
-                //DataContext = new Navegacion();
-                //Iniciar array _tabs
-                _tabs = new List<TabItem>();
-             
+                _tabs = new List<TabItem>();//Iniciar array _tabs
                 //Creamos la tab de agregar mas tabs
                 _tab = new TabItem();
                 _tab.Header = "+";
-
                 //Añadimos la tab al array
                 _tabs.Add(_tab);
                 //Agregamos la primera pestaña normal
                 this.AddTabItem();
-                
-             
-                
             }
             catch (Exception ex)
             {
@@ -53,39 +44,31 @@ namespace Olive
         //Añadir Pestaña
         private void AddTabItem()
         {
+            //agregamos motor
             Pestañas.DataContext = null; //Lista a null
-            ID_Pest++;//Sacamos new id
+
 
             TabItem tab = new TabItem();
             tab.Header = string.Format("Tab {0}", _tabs.Count);//Header path textblock definido en XAml
             tab.Name = string.Format("tab{0}", ID_Pest);//Dandole id a la pestaña
             tab.HeaderTemplate = Pestañas.FindResource("Plant_tabs") as DataTemplate;//agregar template creado en xaml
+            _tabs.Insert(_tabs.Count - 1, tab);// Inserta antes de la ultima pestaña 
+            Pestañas.DataContext = _tabs;// bind tab control
+            Pestañas.SelectedItem = tab;// select newly added tab item
 
-
-            list[ID_Pest -1] = new Navegacion();
-
-
-            navegas.Children.Add(list[ID_Pest -1].obtenbrouser());
-
-            // Inserta antes de la ultima pestaña 
-            _tabs.Insert(_tabs.Count - 1, tab);
-            
-            // bind tab control
-            Pestañas.DataContext = _tabs;
-            // select newly added tab item
-            Pestañas.SelectedItem = tab;
- 
+            //Agregamos motor
+            Motor[ID_Pest] = new Navegacion("http://www.google.es");
+            navegas.Children.Add(Motor[ID_Pest].getbrouser());
+            ID_Pest++;//Sacamos new id
         }
 
         //Button from tabsitems Button_Close_Click
         private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
             string tabName = (sender as Button).CommandParameter.ToString(); //Saca el nombre de la pestaña en la que esta el boton
-            MessageBox.Show(Pestañas.SelectedIndex.ToString());
+            //MessageBox.Show(Pestañas.SelectedIndex.ToString());
             var item = Pestañas.Items.Cast<TabItem>().Where(i => i.Name.Equals(tabName)).SingleOrDefault();
-
             TabItem tab = item as TabItem;
-
            if (tab != null)//Posible error
             {
                 if (_tabs.Count < 3)//queda solo una pestaña < 3 
@@ -93,18 +76,14 @@ namespace Olive
                     Close();
                 }
                 else {
-                    // tab seleccionada
-                    TabItem selectedTab = Pestañas.SelectedItem as TabItem;
-                    // clear tab control binding
-                    Pestañas.DataContext = null;
-                    _tabs.Remove(tab);//Borramos del listado
-                    Pestañas.DataContext = _tabs; // restablece pestañas
-
+                    TabItem selectedTab = Pestañas.SelectedItem as TabItem;// tab seleccionada
                     if (selectedTab == null || selectedTab.Equals(tab))//Si la pestaña seleccionada es borrada, enfocamos otra.
                     {
                         selectedTab = _tabs[0];
                     }
-                    Pestañas.SelectedItem = selectedTab;
+                    Pestañas.DataContext = null;// clear tab control binding
+                    _tabs.Remove(tab);//Borramos del listado
+                    Pestañas.DataContext = _tabs; // restablece pestañas
                 }
             }
         }
@@ -115,26 +94,29 @@ namespace Olive
             if (tab == null) return;
             if (tab != _tab)
             {
-                if (ID_Pest > 0)
+                if (ID_Pest -1 > 0)
                 {
                     // Pestañas.SelectedIndex.ToString();
-
                     navegas.Children.Clear();
-                    navegas.Children.Add(list[Pestañas.SelectedIndex].obtenbrouser());
+                    navegas.Children.Add(Motor[Pestañas.SelectedIndex].getbrouser());
                 }
             }
-
         }
-        private void Pestañas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+
+        /// <summary>
+        /// Pestaña que añade pestañas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Pestañas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) 
         {
             TabItem tab = Pestañas.SelectedItem as TabItem;
             if (tab == null) return;
-
             if (tab == _tab) //Si la pestaña seleccionada es la de añadir
             {
                 AddTabItem();
             }
-        }
+        } 
         private void Pestañas_KeyUp_1(object sender, KeyEventArgs e)
         {
             TabItem tab = Pestañas.SelectedItem as TabItem;
@@ -147,9 +129,9 @@ namespace Olive
                 }
             }
         }
+
         private void Pulsateclas(object sender, KeyEventArgs e)
         {
-
             // Ctrl + t Crea una pestaña
             if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.T))
             {
@@ -181,37 +163,61 @@ namespace Olive
             // Ctrl + F
             /*  if ((Keyboard.Modifiers == ModifierKeys.Control) && (e.Key == Key.N))
               {
-                  //Encontrar alguna manera de buscar en el contenido del webbrowser.
+                  //Encontrar alguna manera de buscar en el contenido del webbrowser.              Ya ace algo con ctrl + f por defecto
               }*/
         }
 
-        private void Badelante_PreviewMouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+        #region Barra herramientas
+        private void TextoUrl_KeyDown(object sender, KeyEventArgs e)
         {
-            list[ID_Pest - 1].seturl("http://www.yahoo.org");
-            list[ID_Pest - 1].navega();
-           
-        }
-        //http://msdn.microsoft.com/es-es/library/bb613579.aspx
-        private childItem FindVisualChild<childItem>(DependencyObject obj)
-    where childItem : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            if (e.Key == Key.Enter)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is childItem)
-                    return (childItem)child;
-                else
-                {
-                    childItem childOfChild = FindVisualChild<childItem>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
+                TextBox t = e.Source as TextBox;
+                Motor[Pestañas.SelectedIndex].seturl(t.Text);
+                Motor[Pestañas.SelectedIndex].goUrl();
             }
-            return null;
+        }
+        
+
+        private void Batras(object sender, RoutedEventArgs e)
+        {
+            Motor[Pestañas.SelectedIndex].goAtras();
         }
 
+        private void Badelante_Click_1(object sender, RoutedEventArgs e)
+        {
+            Motor[Pestañas.SelectedIndex].goAdelante();
+        }
 
+        private void GuardaFavoritos_Click_1(object sender, RoutedEventArgs e)
+        {
 
-       
+        }
+
+        private void Refrescar_Click_1(object sender, RoutedEventArgs e)
+        {
+            Motor[Pestañas.SelectedIndex].Refresh();
+        }
+
+        private void TextoBuscar_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox t = e.Source as TextBox;
+                Motor[Pestañas.SelectedIndex].search(t.Text);
+                Motor[Pestañas.SelectedIndex].goUrl();
+            }
+        }
+
+        private void BotonBuscar_Click_1(object sender, RoutedEventArgs e)
+        {
+            Motor[Pestañas.SelectedIndex].FindName("google");
+        }
+
+        private void BotonHome_Click_1(object sender, RoutedEventArgs e)
+        {
+            Motor[Pestañas.SelectedIndex].goHome();
+        }
+        #endregion
     }
 }
