@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -20,13 +21,18 @@ namespace Olive
         private List<TabItem> _tabs;
         private TabItem _tab;//Pestaña de añadir mas pestañas
         private int ID_Pest = 0; //Necesario id para cerrar pestañas debe de ser un valor unico sin posivilidad de repetir.
-      
+        public string url_temp{ get; set; }
+
+
         private Navegacion[] Motor = new Navegacion[30];
 
         public MainWindow()
         {
             try{
                 InitializeComponent();
+                url_temp = "Home";
+
+
                 _tabs = new List<TabItem>();//Iniciar array _tabs
                 //Creamos la tab de agregar mas tabs
                 _tab = new TabItem();
@@ -174,11 +180,15 @@ namespace Olive
         #region Barra herramientas
         private void TextoUrl_KeyDown(object sender, KeyEventArgs e)
         {
+            ComboBox t = e.Source as ComboBox;
             if (e.Key == Key.Enter)
             {
-                ComboBox t = e.Source as ComboBox;
                 url_Working(t.Text);
             }
+
+            url_temp = t.Text.ToString();
+
+            //MessageBox.Show("hol2 " + url_temp);
         }
         
 
@@ -210,6 +220,8 @@ namespace Olive
                 TextBox t = e.Source as TextBox;
                 Motor[Pestañas.SelectedIndex].search(t.Text);
             }
+            
+
         }
 
         private void BotonBuscar_Click_1(object sender, RoutedEventArgs e)
@@ -248,5 +260,7 @@ namespace Olive
                 }
             Motor[Pestañas.SelectedIndex].goUrl();
          }
+
+
     }
 }
