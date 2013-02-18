@@ -97,8 +97,12 @@ namespace Olive
                 if (ID_Pest -1 > 0)
                 {
                     // Pestañas.SelectedIndex.ToString();
-                    navegas.Children.Clear();
-                    navegas.Children.Add(Motor[Pestañas.SelectedIndex].getbrouser());
+                    try
+                    {
+                        navegas.Children.Clear();
+                        navegas.Children.Add(Motor[Pestañas.SelectedIndex].getbrouser());
+                    }
+                    catch { }
                 }
             }
         }
