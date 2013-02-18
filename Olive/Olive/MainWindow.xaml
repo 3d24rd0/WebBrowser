@@ -39,8 +39,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" 
-
-                                  SelectedValue="{Binding Path=url_temp}" />
+                                  ItemsSource="{Binding}"/>
                              <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
                     </Grid>
 
@@ -52,7 +51,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Button Name="Refrescar" Grid.Column="0" Width="20" BorderBrush="#FF707070" Panel.ZIndex="2" Click="Refrescar_Click_1" Margin="10,0,0,0"/>
-                        <TextBox Name="TextoBuscar" Grid.Column="1" KeyDown="TextoBuscar_KeyDown_1" Margin="10,0,0,0" Text="{Binding Source={StaticResource model}, Path=url_temp}"/>
+                        <TextBox Name="TextoBuscar" Grid.Column="1" KeyDown="TextoBuscar_KeyDown_1" Margin="10,0,0,0"/>
                         <Button Name="BotonBuscar" Grid.Column="2" Width="20" RenderTransformOrigin="-0.2,1.55" Click="BotonBuscar_Click_1"/>
                     </Grid>
                     
