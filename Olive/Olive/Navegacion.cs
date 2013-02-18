@@ -11,6 +11,7 @@ namespace Olive
     class Navegacion
     {
         private Uri url;
+        private String Name;
         private WebBrowser navegador;
         public Uri Home;
 
@@ -22,9 +23,27 @@ namespace Olive
         {
             this.Home = new Uri(Home, UriKind.RelativeOrAbsolute);
             this.navegador = new WebBrowser();
+            navegador.LoadCompleted += navegador_LoadCompleted;
             navegador.Navigate(Home);
         }
+
+        void navegador_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            dynamic doc = navegador.Document;
+            this.Name = doc.Title;
+            this.url = e.Uri;
+            MessageBox.Show(Name + " " + url);
+        }
         //getters and setters
+        public Uri getName()
+        {
+            return url;
+        }
+        public void setName(Uri ruta)
+        {
+            //this.url = new Uri(ruta, UriKind.RelativeOrAbsolute);
+            this.url = ruta;
+        }
 
         public Uri geturl()
         {

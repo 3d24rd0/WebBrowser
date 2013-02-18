@@ -38,7 +38,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" 
+                        <ComboBox Grid.Column="0" x:Name="URL_NAVE" IsEditable="True" StaysOpenOnEdit="True" KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" 
                                   ItemsSource="{Binding}"/>
                              <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
                     </Grid>

@@ -32,7 +32,6 @@ namespace Olive
                 InitializeComponent();
                 url_temp = "Home";
 
-
                 _tabs = new List<TabItem>();//Iniciar array _tabs
                 //Creamos la tab de agregar mas tabs
                 _tab = new TabItem();
@@ -180,7 +179,7 @@ namespace Olive
         #region Barra herramientas
         private void TextoUrl_KeyDown(object sender, KeyEventArgs e)
         {
-            ComboBox t = e.Source as ComboBox;
+            ComboBox t  = e.Source as ComboBox;
             if (e.Key == Key.Enter)
             {
                 url_Working(t.Text);
