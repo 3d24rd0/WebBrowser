@@ -24,7 +24,20 @@ namespace Olive
             this.Home = new Uri(Home, UriKind.RelativeOrAbsolute);
             this.navegador = new WebBrowser();
             navegador.LoadCompleted += navegador_LoadCompleted;
+            navegador.Navigating += navegador_Navigating;
             navegador.Navigate(Home);
+        }
+
+        void navegador_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            //throw new NotImplementedException();
+            try
+            {
+
+                //navegador.Source.Host
+                //MessageBox.Show(e.NavigationMode);
+            }
+            catch { }
         }
 
         void navegador_LoadCompleted(object sender, NavigationEventArgs e)
@@ -66,22 +79,28 @@ namespace Olive
         {
             try
             {
-                navegador.GoForward();
+                if (navegador.CanGoForward)
+                {
+                    navegador.GoForward();
+                }
             }
-            catch (Exception e)
+            catch
             {
-                MessageBox.Show("No se pudo \n Error: " + e );
+                //MessageBox.Show("No se pudo \n Error: " + e );
             }
         }
         public void goAtras()
         {
             try
             {
-                navegador.GoBack();
+                if (navegador.CanGoBack)
+                {
+                    navegador.GoBack();
+                }
             }
-            catch (Exception e)
+            catch 
             {
-                MessageBox.Show("No se pudo \n Error: " + e);
+               // MessageBox.Show("No se pudo \n Error: " + e);
             }
         }
         public void goHome()
@@ -90,9 +109,9 @@ namespace Olive
             {
                 navegador.Navigate(Home);
             }
-            catch (Exception e)
+            catch
             {
-                MessageBox.Show("Error inesperado \n Error: " + e);
+                //MessageBox.Show("Error inesperado \n Error: " + e);
             }
         }
         public void goUrl()

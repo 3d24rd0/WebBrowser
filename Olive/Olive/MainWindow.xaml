@@ -4,7 +4,7 @@
         xmlns:me="clr-namespace:Olive.Properties"
         Title="Olive" Height="350" Width="525" KeyDown="Pulsateclas">
     <Window.Resources>
-        <XmlDataProvider x:Key="favoritos" XPath="favoritos" Source="../../Configuracion/favoritos.xml"/>
+        <XmlDataProvider x:Key="favoritos" XPath="favoritos" Source="../../Configuracion/Favoritos.xml"/>
 
         <!-- create a data template to display the desired XML node values -->
         <DataTemplate x:Key="BookmarkDataTemplate">

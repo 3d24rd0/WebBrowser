@@ -25,6 +25,9 @@ namespace Olive
         private int ID_Pest = 0; //Necesario id para cerrar pestañas debe de ser un valor unico sin posivilidad de repetir.
         private Navegacion[] Motor = new Navegacion[30];
 
+        private string ruta_Conf = "../../Configuracion/";
+        private string ruta_favo = "Favoritos.xml";
+
         public MainWindow()
         {
             try{
@@ -34,7 +37,7 @@ namespace Olive
                 _tab.Header = "+";
                 _tabs.Add(_tab); //Añadimos la tab al array
                 this.AddTabItem();//Agregamos la primera pestaña normal
-                comprobarArchivosXML("Favoritos.xml");
+                comprobarArchivosXML(ruta_favo);
 
             }
             catch (Exception ex)
@@ -47,7 +50,8 @@ namespace Olive
         private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
             string tabName = (sender as Button).CommandParameter.ToString(); //Saca el nombre de la pestaña en la que esta el boton
-            //MessageBox.Show(Pestañas.SelectedIndex.ToString());
+            MessageBox.Show(tabName + Pestañas.SelectedIndex);
+
             var item = Pestañas.Items.Cast<TabItem>().Where(i => i.Name.Equals(tabName)).SingleOrDefault();
             TabItem tab = item as TabItem;
            if (tab != null)//Posible error
@@ -106,6 +110,7 @@ namespace Olive
             }
         }
         #endregion
+
         #region toolbar1
         private void Pestañas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) 
         {
@@ -183,7 +188,7 @@ namespace Olive
         }
         private void GuardaFavoritos_Click_1(object sender, RoutedEventArgs e)
         {
-            CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), "../../Configuracion/Favoritos.xml");
+            CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Conf + ruta_favo));
         }
         private void Refrescar_Click_1(object sender, RoutedEventArgs e)
         {
@@ -246,10 +251,9 @@ namespace Olive
         #region xml
         public void comprobarArchivosXML(string Favorito)
         {
-            string ruta = "../../Configuracion/";
-            Favorito = ruta + Favorito;
+            Favorito = ruta_Conf + Favorito;
 
-            if (CrearCarpetaXml(ruta))
+            if (CrearCarpetaXml(ruta_Conf))
             {
                 if (!ArchivoExiste(Favorito))
                 {
