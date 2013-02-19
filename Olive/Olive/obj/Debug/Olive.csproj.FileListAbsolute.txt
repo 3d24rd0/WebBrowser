@@ -10,3 +10,4 @@ C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive.Properties
 C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive.csproj.GenerateResource.Cache
 C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive.exe
 C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive.pdb
+C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive_MarkupCompile.lref

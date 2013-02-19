@@ -32,17 +32,16 @@ namespace Olive
             dynamic doc = navegador.Document;
             this.Name = doc.Title;
             this.url = e.Uri;
-            MessageBox.Show(Name + " " + url);
         }
         //getters and setters
-        public Uri getName()
+        public string getName()
         {
-            return url;
+            return Name;
         }
-        public void setName(Uri ruta)
+        public void setName(string ruta)
         {
             //this.url = new Uri(ruta, UriKind.RelativeOrAbsolute);
-            this.url = ruta;
+            this.Name = ruta;
         }
 
         public Uri geturl()

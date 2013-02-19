@@ -1,8 +1,9 @@
 ﻿<Window x:Class="Olive.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:me="clr-namespace:Olive.Properties"
         Title="Olive" Height="350" Width="525" KeyDown="Pulsateclas">
-    <Window.Resources>     
+    <Window.Resources>
         <DataTemplate x:Key="Cuerpo">
             <Grid Name="GCuerpo">
                 <Grid.RowDefinitions>
@@ -38,8 +39,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0" x:Name="URL_NAVE" IsEditable="True" StaysOpenOnEdit="True" KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" 
-                                  ItemsSource="{Binding}"/>
+                        <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" />
                              <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
                     </Grid>
 
