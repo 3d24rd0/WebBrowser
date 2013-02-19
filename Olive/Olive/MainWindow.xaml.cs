@@ -34,43 +34,16 @@ namespace Olive
                 _tab.Header = "+";
                 _tabs.Add(_tab); //Añadimos la tab al array
                 this.AddTabItem();//Agregamos la primera pestaña normal
-                CrearCarpetaXml("../../Configuracion");
-                ArchivoExiste("../../Configuracion/favoritos.xml");
-                CrearXmlFavoritos();
+                comprobarArchivosXML("Favoritos.xml");
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ocurrio un error iniciar la aplicaccion \n Error:"+ex);
             }
         }
-        //Añadir Pestaña
-        private void AddTabItem()
-        {
-            //agregamos motor
-            Pestañas.DataContext = null; //Lista a null
-            TabItem tab = new TabItem();
-            tab.Header = string.Format("Tab {0}", _tabs.Count);//Header path textblock definido en XAml
-            tab.Name = string.Format("tab{0}", ID_Pest);//Dandole id a la pestaña
-            tab.HeaderTemplate = Pestañas.FindResource("Plant_tabs") as DataTemplate;//agregar template creado en xaml
-            _tabs.Insert(_tabs.Count - 1, tab);// Inserta antes de la ultima pestaña 
-            Pestañas.DataContext = _tabs;// bind tab control
-            Pestañas.SelectedItem = tab;// select newly added tab item
-            //Agregamos motor
-            Motor[ID_Pest] = new Navegacion("http://www.google.es");
-            WebBrowser a = Motor[ID_Pest].getbrouser();
-            a.LoadCompleted += navegador_LoadCompleted;
-            navegas.Children.Add(Motor[ID_Pest].getbrouser());
-            ID_Pest++;//Sacamos new id
-        }
-        void navegador_LoadCompleted(object sender, NavigationEventArgs e) //Actualiza la url del combobox
-        {
-            try
-            {
-                ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
-            }
-            catch { }
-        }
-        //Button from tabsitems Button_Close_Click
+     //Button from tabsitems Button_Close_Click
+        #region tabitems
         private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
             string tabName = (sender as Button).CommandParameter.ToString(); //Saca el nombre de la pestaña en la que esta el boton
@@ -95,7 +68,24 @@ namespace Olive
                 }
             }
         }
-
+        private void AddTabItem()
+        {
+            //agregamos motor
+            Pestañas.DataContext = null; //Lista a null
+            TabItem tab = new TabItem();
+            tab.Header = string.Format("Tab {0}", _tabs.Count);//Header path textblock definido en XAml
+            tab.Name = string.Format("tab{0}", ID_Pest);//Dandole id a la pestaña
+            tab.HeaderTemplate = Pestañas.FindResource("Plant_tabs") as DataTemplate;//agregar template creado en xaml
+            _tabs.Insert(_tabs.Count - 1, tab);// Inserta antes de la ultima pestaña 
+            Pestañas.DataContext = _tabs;// bind tab control
+            Pestañas.SelectedItem = tab;// select newly added tab item
+            //Agregamos motor
+            Motor[ID_Pest] = new Navegacion("http://www.google.es");
+            WebBrowser a = Motor[ID_Pest].getbrouser();
+            a.LoadCompleted += navegador_LoadCompleted;
+            navegas.Children.Add(Motor[ID_Pest].getbrouser());
+            ID_Pest++;//Sacamos new id
+        }
         private void Tab_change(object sender, SelectionChangedEventArgs e)//Cuando cambia la seleccion de pestaña
         {
             TabItem tab = Pestañas.SelectedItem as TabItem;
@@ -115,12 +105,8 @@ namespace Olive
                 }
             }
         }
-
-        /// <summary>
-        /// Pestaña que añade pestañas.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        #endregion
+        #region toolbar1
         private void Pestañas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) 
         {
             TabItem tab = Pestañas.SelectedItem as TabItem;
@@ -142,7 +128,6 @@ namespace Olive
                 }
             }
         }
-
         private void Pulsateclas(object sender, KeyEventArgs e)
         {
             // Ctrl + t Crea una pestaña
@@ -179,8 +164,6 @@ namespace Olive
                   //Encontrar alguna manera de buscar en el contenido del webbrowser.              Ya ace algo con ctrl + f por defecto
               }
         }
-
-        #region Barra herramientas
         private void TextoUrl_KeyDown(object sender, KeyEventArgs e)
         {
             ComboBox t  = e.Source as ComboBox;
@@ -189,29 +172,23 @@ namespace Olive
                 url_Working(t.Text);
             }
         }
-        
-
         private void Batras(object sender, RoutedEventArgs e)
         {
             Motor[Pestañas.SelectedIndex].goAtras();
 
         }
-
         private void Badelante_Click_1(object sender, RoutedEventArgs e)
         {
             Motor[Pestañas.SelectedIndex].goAdelante();
         }
-
         private void GuardaFavoritos_Click_1(object sender, RoutedEventArgs e)
         {
-            CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString());
+            CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), "../../Configuracion/Favoritos.xml");
         }
-
         private void Refrescar_Click_1(object sender, RoutedEventArgs e)
         {
             Motor[Pestañas.SelectedIndex].Refresh();
         }
-
         private void TextoBuscar_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -222,18 +199,16 @@ namespace Olive
             
 
         }
-
         private void BotonBuscar_Click_1(object sender, RoutedEventArgs e)
         {
            // Motor[Pestañas.SelectedIndex].FindName("google");
         }
-
         private void BotonHome_Click_1(object sender, RoutedEventArgs e)
         {
             Motor[Pestañas.SelectedIndex].goHome();
         }
         #endregion
-
+        #region tools
         private void url_Working(string url)
         {
             Uri ruta;
@@ -259,8 +234,30 @@ namespace Olive
                 }
             Motor[Pestañas.SelectedIndex].goUrl();
          }
-
+        void navegador_LoadCompleted(object sender, NavigationEventArgs e) //Actualiza la url del combobox
+        {
+            try
+            {
+                ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
+            }
+            catch { }
+        }  
+        #endregion
         #region xml
+        public void comprobarArchivosXML(string Favorito)
+        {
+            string ruta = "../../Configuracion/";
+            Favorito = ruta + Favorito;
+
+            if (CrearCarpetaXml(ruta))
+            {
+                if (!ArchivoExiste(Favorito))
+                {
+                    CrearXmlFavoritos(Favorito);
+                }
+
+            }
+        }
         public static bool CrearCarpetaXml(string Ruta)
         {
             bool Respuesta = false;
@@ -277,7 +274,7 @@ namespace Olive
                 }
                 return Respuesta;
             }
-            catch (Exception ex)
+            catch
             {
                 //logger.Error("Error en CrearCarpetaXml, ClaseXml:" + ex.Message);
                 return Respuesta;
@@ -285,7 +282,6 @@ namespace Olive
             }
 
         }
-
         public static bool ArchivoExiste(string Ruta)
         {
             try
@@ -299,71 +295,60 @@ namespace Olive
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 //logger.Error("Error en ArchivoExiste, ClaseXml:" + ex.Message);
                 return false;
             }
         }
-        private static bool CrearXmlFavoritos()
+        private static bool CrearXmlFavoritos(string archivo)
         {
             bool rta = false;
 
             try
             {
-                XmlTextWriter EscribirRec = new XmlTextWriter("../../Configuracion/favoritos.xml", System.Text.Encoding.UTF8);
-
+                XmlTextWriter EscribirRec = new XmlTextWriter(archivo, System.Text.Encoding.UTF8);
                 EscribirRec.Formatting = Formatting.Indented;
                 EscribirRec.Indentation = 2;
                 EscribirRec.WriteStartDocument(false);
                 EscribirRec.WriteComment("Lista de Favoritos");
-
                 EscribirRec.WriteStartElement("favoritos");
-
                 EscribirRec.WriteEndElement();
                 EscribirRec.WriteEndDocument();
                 EscribirRec.Close();
                 rta = true;
             }
-            catch (Exception ex)
+            catch
             {
                 rta = false;
             }
 
             return rta;
         }
-
-        public static bool CrearFavorito(string Nombre, string url)
+        public static bool CrearFavorito(string Nombre, string url, string rutafavorito)
         {
             XmlDocument XmlDoc;
             XmlNode Raiz;
             XmlNode ident;
             bool rta = false;
-
             try
             {
                 XmlDoc = new XmlDocument();
-                XmlDoc.Load("../../Configuracion/favoritos.xml");
+                XmlDoc.Load(rutafavorito);
                 Raiz = XmlDoc.DocumentElement;
-
                 ident = Raiz; // las transacciones quedarán en las exitosas  
-
-
                 XmlElement NuevaTransaccion = XmlDoc.CreateElement("Favorito"); //Como vamos a llamar el nuevo nodo  
                 NuevaTransaccion.InnerXml = "<Nombre></Nombre><Url></Url>"; // Este es el contenido que va a tener el nuevo nodo  
-
                 NuevaTransaccion.AppendChild(XmlDoc.CreateWhitespace("\r\n"));
                 NuevaTransaccion["Nombre"].InnerText = Nombre;
                 NuevaTransaccion["Url"].InnerText = url;
-
-
                 ident.InsertAfter(NuevaTransaccion, ident.LastChild);
-                XmlTextWriter EscribirRec = new XmlTextWriter("../../Configuracion/favoritos.xml", System.Text.Encoding.UTF8);
+                XmlTextWriter EscribirRec = new XmlTextWriter(rutafavorito, System.Text.Encoding.UTF8);
                 XmlDoc.WriteTo(EscribirRec);
                 EscribirRec.Close();
                 rta = true;
             }
-            catch (Exception ex)
+            catch
             {
                 rta = false;
                 //logger.Error("Error en NodoTransacciones, ClaseXml:" + ex.Message);  

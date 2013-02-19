@@ -88,7 +88,8 @@
                     <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" 
                               KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" 
                               ItemsSource="{Binding Source={StaticResource favoritos}, XPath=Favorito}"
-                              ItemTemplate="{StaticResource BookmarkDataTemplate}"/>
+                              ItemTemplate="{StaticResource BookmarkDataTemplate}"
+                              />
                     <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
                 </Grid>
 
