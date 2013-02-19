@@ -57,10 +57,15 @@ namespace Olive
             Pestañas.SelectedItem = tab;// select newly added tab item
             //Agregamos motor
             Motor[ID_Pest] = new Navegacion("http://www.google.es");
+            WebBrowser a = Motor[ID_Pest].getbrouser();
+            a.LoadCompleted += navegador_LoadCompleted;
             navegas.Children.Add(Motor[ID_Pest].getbrouser());
             ID_Pest++;//Sacamos new id
         }
-
+        void navegador_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
+        }
         //Button from tabsitems Button_Close_Click
         private void Button_Close_Click(object sender, RoutedEventArgs e)
         {
@@ -91,7 +96,7 @@ namespace Olive
         {
             TabItem tab = Pestañas.SelectedItem as TabItem;
             if (tab == null) return;
-            if (tab != _tab)
+            if (!tab.Equals(_tab))
             {
                 if (ID_Pest -1 > 0)
                 {
@@ -101,7 +106,6 @@ namespace Olive
                         navegas.Children.Clear();
                         navegas.Children.Add(Motor[Pestañas.SelectedIndex].getbrouser());
                         ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
-                        
                     }
                     catch { }
                 }
