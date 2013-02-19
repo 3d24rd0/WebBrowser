@@ -8,18 +8,22 @@
 
         <!-- create a data template to display the desired XML node values -->
         <DataTemplate x:Key="BookmarkDataTemplate">
-            <StackPanel Margin="5" Name="colocacion"> 
-                <TextBlock FontSize="12" FontWeight="Bold" Foreground="White">
+            <Grid Margin="5" Name="colocacion">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" FontSize="10" FontWeight="Bold" Foreground="White" Height="20"  >
                     <TextBlock.Text>
                         <Binding XPath="Nombre"/>
                     </TextBlock.Text>
                 </TextBlock>
-                <TextBlock FontSize="10" Foreground="LightGray">
+                <TextBlock Grid.Column="0" FontSize="10" Foreground="LightGray" Height="20" Panel.ZIndex="5">
                     <TextBlock.Text>
                         <Binding XPath="Url"/>
                     </TextBlock.Text>
                 </TextBlock>
-            </StackPanel>
+            </Grid>
         </DataTemplate>
         
     </Window.Resources>
@@ -47,7 +51,7 @@
                 </DataTemplate> 
             </TabControl.Resources>
         </TabControl>
-        <Grid Name="GCuerpo" Grid.Row="1" Background="Bisque" Margin="0,-8,0,5">
+        <Grid Name="GCuerpo" Grid.Row="1" Background="Bisque" Margin="0,-9,0,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" ></RowDefinition>
             </Grid.RowDefinitions>
