@@ -3,7 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:me="clr-namespace:Olive.Properties"
         Title="Olive" Height="350" Width="525" KeyDown="Pulsateclas">
-    
+    <Window.Resources>
+        <XmlDataProvider x:Key="favoritos" XPath="favoritos" Source="../../Configuracion/favoritos.xml"/>
+
+        <!-- create a data template to display the desired XML node values -->
+        <DataTemplate x:Key="BookmarkDataTemplate">
+            <StackPanel Margin="5" Name="colocacion"> 
+                <TextBlock FontSize="12" FontWeight="Bold" Foreground="White">
+                    <TextBlock.Text>
+                        <Binding XPath="Nombre"/>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock FontSize="10" Foreground="LightGray">
+                    <TextBlock.Text>
+                        <Binding XPath="Url"/>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -62,7 +81,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" />
+                    <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" 
+                              KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0" 
+                              ItemsSource="{Binding Source={StaticResource favoritos}, XPath=Favorito}"
+                              ItemTemplate="{StaticResource BookmarkDataTemplate}"/>
                     <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
                 </Grid>
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace Olive
 {
@@ -27,16 +29,14 @@ namespace Olive
         {
             try{
                 InitializeComponent();
-
-                
                 _tabs = new List<TabItem>();//Iniciar array _tabs
-                //Creamos la tab de agregar mas tabs
-                _tab = new TabItem();
+                _tab = new TabItem();//Creamos la tab de agregar mas tabs
                 _tab.Header = "+";
-                //Añadimos la tab al array
-                _tabs.Add(_tab);
-                //Agregamos la primera pestaña normal
-                this.AddTabItem();
+                _tabs.Add(_tab); //Añadimos la tab al array
+                this.AddTabItem();//Agregamos la primera pestaña normal
+                CrearCarpetaXml("../../Configuracion");
+                ArchivoExiste("../../Configuracion/favoritos.xml");
+                CrearXmlFavoritos();
             }
             catch (Exception ex)
             {
@@ -62,9 +62,13 @@ namespace Olive
             navegas.Children.Add(Motor[ID_Pest].getbrouser());
             ID_Pest++;//Sacamos new id
         }
-        void navegador_LoadCompleted(object sender, NavigationEventArgs e)
+        void navegador_LoadCompleted(object sender, NavigationEventArgs e) //Actualiza la url del combobox
         {
-            ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
+            try
+            {
+                ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
+            }
+            catch { }
         }
         //Button from tabsitems Button_Close_Click
         private void Button_Close_Click(object sender, RoutedEventArgs e)
@@ -200,7 +204,7 @@ namespace Olive
 
         private void GuardaFavoritos_Click_1(object sender, RoutedEventArgs e)
         {
-
+            CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString());
         }
 
         private void Refrescar_Click_1(object sender, RoutedEventArgs e)
@@ -256,10 +260,118 @@ namespace Olive
             Motor[Pestañas.SelectedIndex].goUrl();
          }
 
-        private void ComboFavoritos_SourceUpdated_1(object sender, DataTransferEventArgs e)
+        #region xml
+        public static bool CrearCarpetaXml(string Ruta)
         {
-            MessageBox.Show("Lol");
+            bool Respuesta = false;
+            try
+            {
+                if (Directory.Exists(Ruta))
+                {
+                    Respuesta = true;
+                }
+                else
+                {
+                    Directory.CreateDirectory(Ruta);
+                    Respuesta = true;
+                }
+                return Respuesta;
+            }
+            catch (Exception ex)
+            {
+                //logger.Error("Error en CrearCarpetaXml, ClaseXml:" + ex.Message);
+                return Respuesta;
+                //No fue posible crear el directorio...
+            }
+
         }
+
+        public static bool ArchivoExiste(string Ruta)
+        {
+            try
+            {
+                if (File.Exists(Ruta))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                //logger.Error("Error en ArchivoExiste, ClaseXml:" + ex.Message);
+                return false;
+            }
+        }
+        private static bool CrearXmlFavoritos()
+        {
+            bool rta = false;
+
+            try
+            {
+                XmlTextWriter EscribirRec = new XmlTextWriter("../../Configuracion/favoritos.xml", System.Text.Encoding.UTF8);
+
+                EscribirRec.Formatting = Formatting.Indented;
+                EscribirRec.Indentation = 2;
+                EscribirRec.WriteStartDocument(false);
+                EscribirRec.WriteComment("Lista de Favoritos");
+
+                EscribirRec.WriteStartElement("favoritos");
+
+                EscribirRec.WriteEndElement();
+                EscribirRec.WriteEndDocument();
+                EscribirRec.Close();
+                rta = true;
+            }
+            catch (Exception ex)
+            {
+                rta = false;
+            }
+
+            return rta;
+        }
+
+        public static bool CrearFavorito(string Nombre, string url)
+        {
+            XmlDocument XmlDoc;
+            XmlNode Raiz;
+            XmlNode ident;
+            bool rta = false;
+
+            try
+            {
+                XmlDoc = new XmlDocument();
+                XmlDoc.Load("../../Configuracion/favoritos.xml");
+                Raiz = XmlDoc.DocumentElement;
+
+                ident = Raiz; // las transacciones quedarán en las exitosas  
+
+
+                XmlElement NuevaTransaccion = XmlDoc.CreateElement("Favorito"); //Como vamos a llamar el nuevo nodo  
+                NuevaTransaccion.InnerXml = "<Nombre></Nombre><Url></Url>"; // Este es el contenido que va a tener el nuevo nodo  
+
+                NuevaTransaccion.AppendChild(XmlDoc.CreateWhitespace("\r\n"));
+                NuevaTransaccion["Nombre"].InnerText = Nombre;
+                NuevaTransaccion["Url"].InnerText = url;
+
+
+                ident.InsertAfter(NuevaTransaccion, ident.LastChild);
+                XmlTextWriter EscribirRec = new XmlTextWriter("../../Configuracion/favoritos.xml", System.Text.Encoding.UTF8);
+                XmlDoc.WriteTo(EscribirRec);
+                EscribirRec.Close();
+                rta = true;
+            }
+            catch (Exception ex)
+            {
+                rta = false;
+                //logger.Error("Error en NodoTransacciones, ClaseXml:" + ex.Message);  
+            }
+            return rta;
+        }
+        #endregion xml
+
 
     }
 }
