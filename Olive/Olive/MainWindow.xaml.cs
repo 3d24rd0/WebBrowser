@@ -21,17 +21,14 @@ namespace Olive
         private List<TabItem> _tabs;
         private TabItem _tab;//Pestaña de añadir mas pestañas
         private int ID_Pest = 0; //Necesario id para cerrar pestañas debe de ser un valor unico sin posivilidad de repetir.
-        public string url_temp{ get; set; }
-
-
         private Navegacion[] Motor = new Navegacion[30];
 
         public MainWindow()
         {
             try{
                 InitializeComponent();
-                url_temp = "Home";
 
+                
                 _tabs = new List<TabItem>();//Iniciar array _tabs
                 //Creamos la tab de agregar mas tabs
                 _tab = new TabItem();
@@ -51,8 +48,6 @@ namespace Olive
         {
             //agregamos motor
             Pestañas.DataContext = null; //Lista a null
-
-
             TabItem tab = new TabItem();
             tab.Header = string.Format("Tab {0}", _tabs.Count);//Header path textblock definido en XAml
             tab.Name = string.Format("tab{0}", ID_Pest);//Dandole id a la pestaña
@@ -60,7 +55,6 @@ namespace Olive
             _tabs.Insert(_tabs.Count - 1, tab);// Inserta antes de la ultima pestaña 
             Pestañas.DataContext = _tabs;// bind tab control
             Pestañas.SelectedItem = tab;// select newly added tab item
-
             //Agregamos motor
             Motor[ID_Pest] = new Navegacion("http://www.google.es");
             navegas.Children.Add(Motor[ID_Pest].getbrouser());
@@ -106,6 +100,8 @@ namespace Olive
                     {
                         navegas.Children.Clear();
                         navegas.Children.Add(Motor[Pestañas.SelectedIndex].getbrouser());
+                        ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
+                        
                     }
                     catch { }
                 }
@@ -184,10 +180,6 @@ namespace Olive
             {
                 url_Working(t.Text);
             }
-
-            url_temp = t.Text.ToString();
-
-            //MessageBox.Show("hol2 " + url_temp);
         }
         
 
@@ -260,6 +252,10 @@ namespace Olive
             Motor[Pestañas.SelectedIndex].goUrl();
          }
 
+        private void ComboFavoritos_SourceUpdated_1(object sender, DataTransferEventArgs e)
+        {
+            MessageBox.Show("Lol");
+        }
 
     }
 }

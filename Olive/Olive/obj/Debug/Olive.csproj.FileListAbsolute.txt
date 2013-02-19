@@ -11,3 +11,16 @@ C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive.csproj.Gen
 C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive.exe
 C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive.pdb
 C:\Users\Guts\Documents\GitHub\WebBrowser\Olive\Olive\obj\Debug\Olive_MarkupCompile.lref
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive.exe
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive.pdb
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\bin\Debug\Olive.exe
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\bin\Debug\Olive.pdb
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive.csprojResolveAssemblyReference.cache
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\MainWindow.g.cs
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\App.g.cs
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive_MarkupCompile.cache
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive_MarkupCompile.lref
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\MainWindow.baml
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive.g.resources
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive.Properties.Resources.resources
+C:\Users\Guts\Desktop\Nueva carpeta (2)\Olive\Olive\obj\Debug\Olive.csproj.GenerateResource.Cache
