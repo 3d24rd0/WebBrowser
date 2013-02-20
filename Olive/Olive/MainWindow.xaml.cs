@@ -99,7 +99,6 @@ namespace Olive
             {
                 if (Pestañas.SelectedIndex > 0)
                 {
-                    // Pestañas.SelectedIndex.ToString();
                     try
                     {
                         navegas.Children.Clear();
@@ -231,7 +230,7 @@ namespace Olive
         }
         private void BotonBuscar_Click_1(object sender, RoutedEventArgs e)
         {
-           // Motor[Pestañas.SelectedIndex].FindName("google");
+            Motor[Pestañas.SelectedIndex].FindName("google");
         }
         private void BotonHome_Click_1(object sender, RoutedEventArgs e)
         {
@@ -242,7 +241,6 @@ namespace Olive
         private void url_Working(string url)
         {
             Uri ruta;
-            //this.Home = new Uri(Home, UriKind.RelativeOrAbsolute);
             if (String.IsNullOrEmpty(url)) return;
             if (url.Equals("about:blank")) return;
 
@@ -256,7 +254,6 @@ namespace Olive
             }
                 try
                 {
-                   // webBrowser1.Navigate(new Uri(url));
                     Motor[Pestañas.SelectedIndex].seturl(ruta);
                 }
                 catch (System.UriFormatException)
@@ -422,7 +419,8 @@ namespace Olive
 
         private void SearchIcon_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Hola");
+            //MessageBox.Show("Hola");
+            Motor[Pestañas.SelectedIndex].search(Busca.Text);
         }
 
 

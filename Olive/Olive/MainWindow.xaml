@@ -13,9 +13,8 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ScrollViewer x:Name="PART_Content1Host" Grid.Row="0"
-                      HorizontalScrollBarVisibility="Hidden">
-        <TabControl Name="Pestañas" ItemsSource="{Binding}" 
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+            <TabControl Name="Pestañas" ItemsSource="{Binding}" 
                     SelectionChanged="Tab_change"
                     MouseLeftButtonUp="Pestañas_MouseLeftButtonUp"
                     KeyUp="Pestañas_KeyUp_1">
@@ -37,7 +36,7 @@
         
         <Grid Name="GCuerpo" Grid.Row="1" Background="Bisque" Margin="0,-9,0,5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" ></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -46,9 +45,6 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
-
-
                 <Grid Name="Botones" Grid.Column="0" Panel.ZIndex="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -72,17 +68,20 @@
                     <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" 
                               KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0"
                               SelectionChanged="ComboFavoritos_SelectionChanged_1"
-                              VerticalAlignment="Center"/>
-                    <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
+                              VerticalAlignment="Center">
+                    </ComboBox>
+                    <Image x:Name="GuardaFavoritos" Grid.Column="1"
+                            Stretch="None"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Source="/Theme/estrella.png" MouseLeftButtonUp="GuardaFavoritos_Click_1"/>
+                    
                 </Grid>
-
-
                     <Grid Name="GBusca" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" HorizontalAlignment="Center"
-                                               VerticalAlignment="Center">
+                    <TextBox Name="Busca" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBox.Template>
                             <ControlTemplate>
                                 <Grid Background="White" Margin="5,5,0,5">

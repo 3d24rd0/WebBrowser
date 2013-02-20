@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("theme/clear.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("theme/search.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("theme/estrella-icono-8714-32.png")]
 
 
