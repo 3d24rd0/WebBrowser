@@ -94,7 +94,10 @@
   <ItemGroup>
     <Resource Include="Theme\delete.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Theme\clear.png" />
+    <Resource Include="Theme\search.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Configuracion\favoritos.xml" />
   </ItemGroup>

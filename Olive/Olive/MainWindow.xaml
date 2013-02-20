@@ -11,8 +11,11 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>    
-        <TabControl Grid.Row="0" Name="Pestañas" ItemsSource="{Binding}" 
+        </Grid.RowDefinitions>
+
+        <ScrollViewer x:Name="PART_Content1Host" Grid.Row="0"
+                      HorizontalScrollBarVisibility="Hidden">
+        <TabControl Name="Pestañas" ItemsSource="{Binding}" 
                     SelectionChanged="Tab_change"
                     MouseLeftButtonUp="Pestañas_MouseLeftButtonUp"
                     KeyUp="Pestañas_KeyUp_1">
@@ -27,9 +30,11 @@
                         <!--Texto de las pestañas -->
                         <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=TabItem }, Path=Header}" />
                     </DockPanel>
-                </DataTemplate> 
+                </DataTemplate>
             </TabControl.Resources>
-        </TabControl>
+            </TabControl>
+        </ScrollViewer>
+        
         <Grid Name="GCuerpo" Grid.Row="1" Background="Bisque" Margin="0,-9,0,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" ></RowDefinition>
@@ -66,20 +71,45 @@
                     </Grid.ColumnDefinitions>
                     <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" 
                               KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0"
-                              SelectionChanged="ComboFavoritos_SelectionChanged_1"/>
+                              SelectionChanged="ComboFavoritos_SelectionChanged_1"
+                              VerticalAlignment="Center"/>
                     <Button Grid.Column="1" Name="GuardaFavoritos" Click="GuardaFavoritos_Click_1" Width="10" Margin="-50,5,0,10" Panel.ZIndex="1"/>
                 </Grid>
 
 
-                <Grid Name="GBusca" Grid.Column="2">
+                    <Grid Name="GBusca" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Button Name="Refrescar" Grid.Column="0" Width="20" BorderBrush="#FF707070" Panel.ZIndex="2" Click="Refrescar_Click_1" Margin="10,0,0,0"/>
-                    <TextBox Name="TextoBuscar" Grid.Column="1" KeyDown="TextoBuscar_KeyDown_1" Margin="10,0,0,0"/>
-                    <Button Name="BotonBuscar" Grid.Column="2" Width="20" RenderTransformOrigin="-0.2,1.55" Click="BotonBuscar_Click_1"/>
+                    <TextBox Grid.Column="0" HorizontalAlignment="Center"
+                                               VerticalAlignment="Center">
+                        <TextBox.Template>
+                            <ControlTemplate>
+                                <Grid Background="White" Margin="5,5,0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ScrollViewer x:Name="PART_ContentHost" Grid.Column="0" />
+                                        <Border x:Name="PART_SearchIconBorder"
+                                              Grid.Column="1"
+                                              BorderThickness="1"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalAlignment="Stretch">
+                                            <Image x:Name="SearchIcon"
+                                               Stretch="None"
+                                               Width="15"
+                                               Height="15" 
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Source="/Theme/search.png" MouseLeftButtonUp="SearchIcon_MouseLeftButtonUp_1"/>
+                                        </Border>   
+                                </Grid>
+                            </ControlTemplate>
+
+                        </TextBox.Template>
+                    </TextBox>
+                   
                 </Grid>
 
                 <Grid Name="Gbutonsher" Grid.Column="3">

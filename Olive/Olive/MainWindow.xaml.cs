@@ -420,6 +420,11 @@ namespace Olive
         }
         #endregion xml
 
+        private void SearchIcon_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Hola");
+        }
+
 
 
 

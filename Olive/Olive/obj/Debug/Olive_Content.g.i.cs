@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("configuracion/favoritos.xml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("theme/clear.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("theme/search.png")]
 
 
