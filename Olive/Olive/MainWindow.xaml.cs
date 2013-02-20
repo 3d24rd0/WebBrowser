@@ -37,8 +37,9 @@ namespace Olive
                 _tab.Header = "+";
                 _tabs.Add(_tab); //Añadimos la tab al array
                 this.AddTabItem();//Agregamos la primera pestaña normal
-                comprobarArchivosXML(ruta_favo);
 
+                comprobarArchivosXML(ruta_favo);
+                Muestra_favoritos(ruta_Conf + ruta_favo);
             }
             catch (Exception ex)
             {
@@ -96,7 +97,7 @@ namespace Olive
             if (tab == null) return;
             if (!tab.Equals(_tab))
             {
-                if (ID_Pest -1 > 0)
+                if (Pestañas.SelectedIndex > 0)
                 {
                     // Pestañas.SelectedIndex.ToString();
                     try
@@ -189,6 +190,30 @@ namespace Olive
         private void GuardaFavoritos_Click_1(object sender, RoutedEventArgs e)
         {
             CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Conf + ruta_favo));
+            Muestra_favoritos(ruta_Conf + ruta_favo);
+        }
+        private void ComboFavoritos_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("lol" + ComboFavoritos.SelectedIndex.ToString());
+            char[] a = ComboFavoritos.SelectedItem.ToString().ToCharArray();
+            Boolean estas = false;
+            string temp = "";
+            for(int o = 0; o < a.Length; o++)
+            {
+                if (estas)
+                {
+                    //MessageBox.Show(a[o].ToString());
+                    temp += a[o];
+                }
+                if(a[o].Equals('\n') && !estas){
+                   // MessageBox.Show(a[o].ToString());
+                    estas = true;
+                }
+            }
+            Motor[Pestañas.SelectedIndex].seturl(new Uri(temp, UriKind.RelativeOrAbsolute));
+            Motor[Pestañas.SelectedIndex].goUrl();
+            //MessageBox.Show(Motor[Pestañas.SelectedIndex].geturl().ToString());
+            //url_Working(temp);
         }
         private void Refrescar_Click_1(object sender, RoutedEventArgs e)
         {
@@ -220,6 +245,7 @@ namespace Olive
             //this.Home = new Uri(Home, UriKind.RelativeOrAbsolute);
             if (String.IsNullOrEmpty(url)) return;
             if (url.Equals("about:blank")) return;
+
             if (!url.StartsWith("http://") || !url.StartsWith("https://"))
             {
                 ruta = new Uri("http://" + url, UriKind.RelativeOrAbsolute);
@@ -359,7 +385,42 @@ namespace Olive
             }
             return rta;
         }
+        public void Muestra_favoritos(string archivo)
+        {
+            String nombre = "";
+            String Url = "";
+            Boolean primero = false;
+            Boolean segundo = false;
+            XmlTextReader reader = new XmlTextReader(archivo);
+            ComboFavoritos.Items.Clear();//Limpia antes de llenar.
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element: //Display the text in each element
+                        if (reader.Name == "Nombre")
+                        {
+                            nombre = reader.ReadString();
+                            primero = true;
+                        }
+                        if (reader.Name == "Url")
+                        {
+                            Url = reader.ReadString();
+                            segundo = true;
+                        }
+                        if (primero == true && segundo == true)
+                        {
+                            ComboFavoritos.Items.Add(nombre + "\n" + Url);
+                            primero = false;
+                            segundo = false;
+                        }
+                        break;
+                }
+            }
+        }
         #endregion xml
+
+
 
 
     }
