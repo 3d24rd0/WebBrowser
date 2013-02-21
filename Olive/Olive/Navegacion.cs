@@ -39,11 +39,9 @@ namespace Olive
             }
             catch { }
         }
-
         void navegador_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            dynamic doc = navegador.Document;
-            this.Name = doc.Title;
+            this.Name = navegador.Source.Host;
             this.url = e.Uri;
         }
         //getters and setters
