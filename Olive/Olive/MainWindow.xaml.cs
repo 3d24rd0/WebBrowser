@@ -42,7 +42,7 @@ namespace Olive
                 comprobarArchivosXML(ruta_favo, ruta_Archivos);
                 comprobarArchivosXML(ruta_Histo, ruta_Archivos);
                 comprobarArchivosXML(Main_xmlCarpeta, ruta_Archivos);
-                Muestra_favoritos(ruta_Archivos + ruta_favo);
+                Muestra_Istorial(ruta_Archivos + ruta_Histo);
             }
             catch (Exception ex)
             {
@@ -281,9 +281,35 @@ namespace Olive
         }
         private void EliminarF_Click_1(object sender, RoutedEventArgs e)
         {
-            
-           // Favoritos.Children.Add()
+            Favorito_Agregar_combobox("manolo2");
+            Favorito_Agregar_boton("pepe");
         }
+        private void Favorito_Agregar_combobox(string nombre)
+        {
+            ComboBox a = new ComboBox();
+            a.Name = nombre;
+            a.Text = nombre;
+            a.SelectionChanged += a_SelectionChanged;
+            favoritos.Children.Insert(0, a);
+        }
+        private void Favorito_Agregar_boton(string nombre)
+        {
+            Button a = new Button();
+            a.Name = nombre;
+            a.Width = 200;
+            a.Click += a_Click;
+            favoritos.Children.Insert(0,a);
+        }
+        void a_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(e.Source.ToString() + sender.ToString());
+        }
+        void a_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            MessageBox.Show(e.Source.ToString() + sender.ToString());
+        }
+
 
         private void OkF_Click_1(object sender, RoutedEventArgs e)
         {
@@ -559,7 +585,7 @@ namespace Olive
                 return false;
             }
         }
-        public void Muestra_favoritos(string archivo)
+        public void Muestra_Istorial(string archivo)
         {
             String nombre = "";
             String Url = "";
@@ -592,6 +618,7 @@ namespace Olive
                 }
             }
         }
+  
         public Boolean existexml_carpetas(String nombre)
         {
             XmlTextReader reader = new XmlTextReader("../../Configuracion/ArchivosXml/MainCarpetas.xml");
