@@ -26,9 +26,10 @@ namespace Olive
         private int ID_Pest = 0; //Necesario id para cerrar pestañas debe de ser un valor unico sin posivilidad de repetir.
         private Navegacion[] Motor = new Navegacion[30];
 
-        private string ruta_Conf = "../../Configuracion/";
+        private string ruta_Archivos = "../../Configuracion/ArchivosXml/";
         private string ruta_favo = "Favoritos.xml";
         private string ruta_Histo = "Historial.xml";
+        private string Main_xmlCarpeta = "MainCarpetas.xml";
         private string ultimapaginavisitada = "Olive";
 
         public MainWindow()
@@ -38,9 +39,10 @@ namespace Olive
                 _tabs = new List<TabItem>();//Iniciar array _tabs
                 TabAdding();//Agregamos la pestaña de crear mas.
                 this.AddTabItem();//Agregamos la primera pestaña normal
-                comprobarArchivosXML(ruta_favo); 
-                comprobarArchivosXML(ruta_Histo);
-                Muestra_favoritos(ruta_Conf + ruta_favo);
+                comprobarArchivosXML(ruta_favo, ruta_Archivos);
+                comprobarArchivosXML(ruta_Histo, ruta_Archivos);
+                comprobarArchivosXML(Main_xmlCarpeta, ruta_Archivos);
+                Muestra_favoritos(ruta_Archivos + ruta_favo);
             }
             catch (Exception ex)
             {
@@ -111,7 +113,7 @@ namespace Olive
                     _tabs.Remove(tab);//Borramos del listado
                     Pestañas.DataContext = _tabs; // restablece pestañas
                     navegas.Children.Clear();
-                    Pestañas.Items.;
+             
                     //navegas.Children.Add(Motor[w].getbrouser());
                    // ComboFavoritos.Text = Motor[w].geturl().ToString();
                 }
@@ -230,11 +232,6 @@ namespace Olive
         {
             Motor[Pestañas.SelectedIndex].goAdelante();
         }
-        private void GuardaFavoritos_Click_1(object sender, RoutedEventArgs e)
-        {
-            CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Conf + ruta_favo));
-            Muestra_favoritos(ruta_Conf + ruta_favo);
-        }
         private void ComboFavoritos_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             MessageBox.Show("lol" + ComboFavoritos.SelectedIndex.ToString());
@@ -282,7 +279,39 @@ namespace Olive
         {//Imagen de texbox para buscar
             Motor[Pestañas.SelectedIndex].search(Busca.Text);
         }
+        private void EliminarF_Click_1(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void OkF_Click_1(object sender, RoutedEventArgs e)
+        {
+            // nombrecarpeta, nombre 
+            string nombre = Nombre_Nombre.Text;
+            if (Nombre_Nombre.Text.Equals("") || Nombre_Nombre.Text == null)
+            {
+                nombre = Motor[Pestañas.SelectedIndex].getName();
+            }
+            if (Nombre_Carpeta.Text.Equals("") || Nombre_Carpeta.Text == null)
+            {
+                CrearFavorito(nombre, Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Archivos + ruta_favo));
+            }
+            else
+            {
+                if (!existexml_carpetas(Nombre_Carpeta.Text))
+                {
+                    xml_crea_carpeta_favoritos(Nombre_Carpeta.Text.ToString());//insertamos en xml main
+                    CrearXml(ruta_Archivos, Nombre_Carpeta.Text);//creamos archivo nuevo.
+                }
+                //insertamos en archivo de la carpeta correspondiente
+                CrearFavorito(nombre, Motor[Pestañas.SelectedIndex].geturl().ToString(),(ruta_Archivos + Nombre_Carpeta.Text));
+
+            }
+
+            MessageBox.Show(nombre + Nombre_Carpeta.Text);
+           // CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Archivos + ruta_favo));
+           // Muestra_favoritos(ruta_Archivos + ruta_favo);
+        }
         #endregion
         #region tools
         private void url_Working(string url)
@@ -313,20 +342,20 @@ namespace Olive
             try
             {
                 ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
-                CrearHistorial(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Conf + ruta_Histo));
+                CrearHistorial(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Archivos + ruta_Histo));
             }
             catch { }
         }  
         #endregion
         #region xml
-        public void comprobarArchivosXML(string ArchivoXml)
+        public void comprobarArchivosXML(string ArchivoXml, String ruta)
         {
-            ArchivoXml = ruta_Conf + ArchivoXml;
-            if (CrearCarpetaXml(ruta_Conf))
+            ArchivoXml = ruta + ArchivoXml;
+            if (CrearCarpetaXml(ruta))
             {
                 if (!ArchivoExiste(ArchivoXml))
                 {
-                    CrearXml(ArchivoXml);
+                    CrearXml(ArchivoXml,"");
                 }
             }
         }
@@ -367,35 +396,67 @@ namespace Olive
                 return false;
             }
         }
-        private static bool CrearXml(string archivo)
+        private static bool CrearXml(string Ruta_archivo, String Nombre_archivo)
         {
             try
             {
-                if (archivo == "../../Configuracion/Favoritos.xml")
+                if (Nombre_archivo != "")
                 {
-                    XmlTextWriter EscribirRec = new XmlTextWriter(archivo, System.Text.Encoding.UTF8);
-                    EscribirRec.Formatting = Formatting.Indented;
-                    EscribirRec.Indentation = 2;
-                    EscribirRec.WriteStartDocument(false);
-                    EscribirRec.WriteComment("Lista de Favoritos");
-                    EscribirRec.WriteStartElement("favoritos");
-                    EscribirRec.WriteEndElement();
-                    EscribirRec.WriteEndDocument();
-                    EscribirRec.Close();
-                    return true;
+                    if (Ruta_archivo == "../../Configuracion/ArchivosXml/Favoritos.xml")
+                    {
+                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo, System.Text.Encoding.UTF8);
+                        EscribirRec.Formatting = Formatting.Indented;
+                        EscribirRec.Indentation = 2;
+                        EscribirRec.WriteStartDocument(false);
+                        EscribirRec.WriteComment("Lista de Favoritos");
+                        EscribirRec.WriteStartElement("favoritos");
+                        EscribirRec.WriteEndElement();
+                        EscribirRec.WriteEndDocument();
+                        EscribirRec.Close();
+                        return true;
+                    }
+                    if (Ruta_archivo == "../../Configuracion/ArchivosXml/Historial.xml")
+                    {
+                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo, System.Text.Encoding.UTF8);
+                        EscribirRec.Formatting = Formatting.Indented;
+                        EscribirRec.Indentation = 2;
+                        EscribirRec.WriteStartDocument(false);
+                        EscribirRec.WriteComment("Lista de Historial");
+                        EscribirRec.WriteStartElement("Historial");
+                        EscribirRec.WriteEndElement();
+                        EscribirRec.WriteEndDocument();
+                        EscribirRec.Close();
+                        return true;
+                    }
+
+
+                    if (Ruta_archivo == "../../Configuracion/ArchivosXml/MainCarpetas.xml")
+                    {
+                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo, System.Text.Encoding.UTF8);
+                        EscribirRec.Formatting = Formatting.Indented;
+                        EscribirRec.Indentation = 2;
+                        EscribirRec.WriteStartDocument(false);
+                        EscribirRec.WriteComment("Lista de Carpetas Contenedoras de favoritos");
+                        EscribirRec.WriteStartElement("Carpeta");
+                        EscribirRec.WriteEndElement();
+                        EscribirRec.WriteEndDocument();
+                        EscribirRec.Close();
+                        return true;
+                    }
                 }
-                if (archivo == "../../Configuracion/Historial.xml")
+                else
                 {
-                    XmlTextWriter EscribirRec = new XmlTextWriter(archivo, System.Text.Encoding.UTF8);
+                    XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo + Nombre_archivo, System.Text.Encoding.UTF8);
                     EscribirRec.Formatting = Formatting.Indented;
                     EscribirRec.Indentation = 2;
                     EscribirRec.WriteStartDocument(false);
-                    EscribirRec.WriteComment("Lista de Historial");
-                    EscribirRec.WriteStartElement("Historial");
+                    EscribirRec.WriteComment("Lista de Carpetas Contenedoras de favoritos");
+                    EscribirRec.WriteStartElement("Carpeta");
                     EscribirRec.WriteEndElement();
                     EscribirRec.WriteEndDocument();
                     EscribirRec.Close();
                     return true;
+
                 }
                 return false;
             }
@@ -445,6 +506,7 @@ namespace Olive
                     String fecha_actual = Hoy.ToString("dd-MM-yyyy");
                     String HoraActual = Hoy.ToString("T", CultureInfo.InstalledUICulture);
                     XmlDoc = new XmlDocument();
+                   
                     XmlDoc.Load(rutafavorito);
                     Raiz = XmlDoc.DocumentElement;
                     ident = Raiz; // las transacciones quedarán en las exitosas  
@@ -468,6 +530,32 @@ namespace Olive
             catch
             {
                 return false;  
+            }
+        }
+        public bool xml_crea_carpeta_favoritos(string Nombre)
+        {//inserta en main xml nombres de las carpetas
+            XmlDocument XmlDoc;
+            XmlNode Raiz;
+            XmlNode ident;
+            try
+            {
+                XmlDoc = new XmlDocument();
+                XmlDoc.Load(ruta_Archivos + Main_xmlCarpeta);
+                Raiz = XmlDoc.DocumentElement;
+                ident = Raiz; // las transacciones quedarán en las exitosas  
+                XmlElement NuevaTransaccion = XmlDoc.CreateElement("Files"); //Como vamos a llamar el nuevo nodo  
+                NuevaTransaccion.InnerXml = "<Nombre></Nombre>"; // Este es el contenido que va a tener el nuevo nodo  
+                NuevaTransaccion.AppendChild(XmlDoc.CreateWhitespace("\r\n"));
+                NuevaTransaccion["Nombre"].InnerText = Nombre;
+                ident.InsertAfter(NuevaTransaccion, ident.LastChild);
+                XmlTextWriter EscribirRec = new XmlTextWriter((ruta_Archivos + Main_xmlCarpeta), System.Text.Encoding.UTF8);
+                XmlDoc.WriteTo(EscribirRec);
+                EscribirRec.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
         public void Muestra_favoritos(string archivo)
@@ -503,7 +591,29 @@ namespace Olive
                 }
             }
         }
+        public Boolean existexml_carpetas(String nombre)
+        {
+            XmlTextReader reader = new XmlTextReader("../../Configuracion/ArchivosXml/MainCarpetas.xml");
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element: //Display the text in each element
+                        if (reader.Name == "Nombre")
+                        {
+                           if(reader.ReadString() == nombre)
+                           {
+                               return true;
+                           }
+                        }
+                        break;
+                }
+            }
+            return false;
+        }
         #endregion xml
+
+
 
     }
 }

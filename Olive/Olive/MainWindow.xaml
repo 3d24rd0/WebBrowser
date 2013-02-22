@@ -9,7 +9,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -37,6 +36,7 @@
         <Grid Name="GCuerpo" Grid.Row="1" Background="Bisque" Margin="0,-9,0,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -61,23 +61,55 @@
                 </Grid>
 
                 <Grid Name="Url" Grid.Column="1" Margin="10,0,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" 
                               KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0"
                               SelectionChanged="ComboFavoritos_SelectionChanged_1"
                               VerticalAlignment="Center">
+                        
                     </ComboBox>
-                    <Image x:Name="GuardaFavoritos" Grid.Column="1"
-                            Stretch="None"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Source="/Theme/estrella.png" MouseLeftButtonUp="GuardaFavoritos_Click_1"/>
-                    
+                    <ComboBox Width="10" Grid.Column="1" Margin="5,5,5,5">
+                        <Grid Width="Auto" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Name="TitleF" Grid.Row="0">Añadir a Favoritos</TextBox>
+                            <Grid Background="#FFE5E5E5" Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Name="NombreF" Grid.Column="0" Grid.Row="0">Nombre:</TextBlock>
+                                <TextBox Name="Nombre_Nombre" Grid.Column="1" Grid.Row="0"/>
+                                <TextBlock Name="CarpetaF" Grid.Column="0" Grid.Row="1">Carpeta:</TextBlock>
+                                <TextBox Name="Nombre_Carpeta" Grid.Column="1" Grid.Row="1"/>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Name="EliminarF" Grid.Column="0" Margin="10,0,0,0" Click="EliminarF_Click_1">Eliminar</Button>
+                                <Button Name="OkF" Grid.Column="1" Width="Auto" Margin="100,0,0,0" Click="OkF_Click_1">OK</Button>
+                            </Grid>
+                        </Grid>
+                    </ComboBox>
+
                 </Grid>
-                    <Grid Name="GBusca" Grid.Column="2">
+
+
+
+                <Grid Name="GBusca" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
@@ -110,7 +142,6 @@
                     </TextBox>
                    
                 </Grid>
-
                 <Grid Name="Gbutonsher" Grid.Column="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -122,11 +153,12 @@
 
             </Grid>
 
+            <Grid Name="navegas" Grid.Row="1" >
+            </Grid>
         </Grid>
 
 
-        <Grid Name="navegas" Grid.Row="2"> 
-        </Grid>
+
 
     </Grid>
 </Window>
