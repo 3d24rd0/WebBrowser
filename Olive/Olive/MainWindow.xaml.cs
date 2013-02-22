@@ -26,7 +26,7 @@ namespace Olive
         private int ID_Pest = 0; //Necesario id para cerrar pestañas debe de ser un valor unico sin posivilidad de repetir.
         private Navegacion[] Motor = new Navegacion[30];
 
-        private string ruta_Archivos = "../../Configuracion/ArchivosXml/";
+        private string ruta_Archivos = "Configuracion/ArchivosXml/";
         private string ruta_favo = "Favoritos.xml";
         private string ruta_Histo = "Historial.xml";
         private string Main_xmlCarpeta = "Carpetas.xml";
@@ -615,7 +615,7 @@ namespace Olive
   
         public Boolean existexml_carpetas(String nombre)
         {
-            XmlTextReader reader = new XmlTextReader("../../Configuracion/ArchivosXml/Carpetas.xml");
+            XmlTextReader reader = new XmlTextReader("Configuracion/ArchivosXml/Carpetas.xml");
             while (reader.Read())
             {
                 switch (reader.NodeType)
