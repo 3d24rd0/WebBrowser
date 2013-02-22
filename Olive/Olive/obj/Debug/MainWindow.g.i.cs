@@ -41,7 +41,7 @@ namespace Olive {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector, System.Windows.Markup.IStyleConnector {
         
         
-        #line 16 "..\..\MainWindow.xaml"
+        #line 17 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TabControl Pestañas;
         
@@ -49,7 +49,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 36 "..\..\MainWindow.xaml"
+        #line 37 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid GCuerpo;
         
@@ -105,7 +105,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 63 "..\..\MainWindow.xaml"
+        #line 62 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid Url;
         
@@ -113,7 +113,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 68 "..\..\MainWindow.xaml"
+        #line 67 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox ComboFavoritos;
         
@@ -121,7 +121,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 81 "..\..\MainWindow.xaml"
+        #line 80 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox TitleF;
         
@@ -129,7 +129,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 92 "..\..\MainWindow.xaml"
+        #line 91 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock NombreF;
         
@@ -137,7 +137,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 93 "..\..\MainWindow.xaml"
+        #line 92 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox Nombre_Nombre;
         
@@ -145,7 +145,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 94 "..\..\MainWindow.xaml"
+        #line 93 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock CarpetaF;
         
@@ -153,7 +153,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 95 "..\..\MainWindow.xaml"
+        #line 94 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox Nombre_Carpeta;
         
@@ -161,7 +161,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 102 "..\..\MainWindow.xaml"
+        #line 101 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button EliminarF;
         
@@ -169,7 +169,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 103 "..\..\MainWindow.xaml"
+        #line 102 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button OkF;
         
@@ -177,7 +177,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 112 "..\..\MainWindow.xaml"
+        #line 107 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid GBusca;
         
@@ -185,7 +185,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 116 "..\..\MainWindow.xaml"
+        #line 111 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox Busca;
         
@@ -193,7 +193,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 145 "..\..\MainWindow.xaml"
+        #line 140 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid Gbutonsher;
         
@@ -201,7 +201,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 150 "..\..\MainWindow.xaml"
+        #line 145 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button BotonHome;
         
@@ -209,7 +209,7 @@ namespace Olive {
         #line hidden
         
         
-        #line 151 "..\..\MainWindow.xaml"
+        #line 146 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button BotonHerramientas;
         
@@ -217,7 +217,15 @@ namespace Olive {
         #line hidden
         
         
-        #line 156 "..\..\MainWindow.xaml"
+        #line 151 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Grid Favoritos;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 154 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid navegas;
         
@@ -265,19 +273,19 @@ namespace Olive {
             case 2:
             this.Pestañas = ((System.Windows.Controls.TabControl)(target));
             
-            #line 17 "..\..\MainWindow.xaml"
+            #line 18 "..\..\MainWindow.xaml"
             this.Pestañas.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.Tab_change);
             
             #line default
             #line hidden
             
-            #line 18 "..\..\MainWindow.xaml"
+            #line 19 "..\..\MainWindow.xaml"
             this.Pestañas.MouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.Pestañas_MouseLeftButtonUp);
             
             #line default
             #line hidden
             
-            #line 19 "..\..\MainWindow.xaml"
+            #line 20 "..\..\MainWindow.xaml"
             this.Pestañas.KeyUp += new System.Windows.Input.KeyEventHandler(this.Pestañas_KeyUp_1);
             
             #line default
@@ -322,13 +330,13 @@ namespace Olive {
             case 12:
             this.ComboFavoritos = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 69 "..\..\MainWindow.xaml"
+            #line 68 "..\..\MainWindow.xaml"
             this.ComboFavoritos.KeyDown += new System.Windows.Input.KeyEventHandler(this.TextoUrl_KeyDown);
             
             #line default
             #line hidden
             
-            #line 70 "..\..\MainWindow.xaml"
+            #line 69 "..\..\MainWindow.xaml"
             this.ComboFavoritos.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.ComboFavoritos_SelectionChanged_1);
             
             #line default
@@ -352,7 +360,7 @@ namespace Olive {
             case 18:
             this.EliminarF = ((System.Windows.Controls.Button)(target));
             
-            #line 102 "..\..\MainWindow.xaml"
+            #line 101 "..\..\MainWindow.xaml"
             this.EliminarF.Click += new System.Windows.RoutedEventHandler(this.EliminarF_Click_1);
             
             #line default
@@ -361,7 +369,7 @@ namespace Olive {
             case 19:
             this.OkF = ((System.Windows.Controls.Button)(target));
             
-            #line 103 "..\..\MainWindow.xaml"
+            #line 102 "..\..\MainWindow.xaml"
             this.OkF.Click += new System.Windows.RoutedEventHandler(this.OkF_Click_1);
             
             #line default
@@ -379,7 +387,7 @@ namespace Olive {
             case 24:
             this.BotonHome = ((System.Windows.Controls.Button)(target));
             
-            #line 150 "..\..\MainWindow.xaml"
+            #line 145 "..\..\MainWindow.xaml"
             this.BotonHome.Click += new System.Windows.RoutedEventHandler(this.BotonHome_Click_1);
             
             #line default
@@ -389,6 +397,9 @@ namespace Olive {
             this.BotonHerramientas = ((System.Windows.Controls.Button)(target));
             return;
             case 26:
+            this.Favoritos = ((System.Windows.Controls.Grid)(target));
+            return;
+            case 27:
             this.navegas = ((System.Windows.Controls.Grid)(target));
             return;
             }
@@ -406,7 +417,7 @@ namespace Olive {
             {
             case 3:
             
-            #line 23 "..\..\MainWindow.xaml"
+            #line 24 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Close_Click);
             
             #line default
@@ -414,7 +425,7 @@ namespace Olive {
             break;
             case 22:
             
-            #line 136 "..\..\MainWindow.xaml"
+            #line 131 "..\..\MainWindow.xaml"
             ((System.Windows.Controls.Image)(target)).MouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.SearchIcon_MouseLeftButtonUp_1);
             
             #line default

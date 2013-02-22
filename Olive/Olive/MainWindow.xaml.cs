@@ -281,7 +281,8 @@ namespace Olive
         }
         private void EliminarF_Click_1(object sender, RoutedEventArgs e)
         {
-
+            
+           // Favoritos.Children.Add()
         }
 
         private void OkF_Click_1(object sender, RoutedEventArgs e)
@@ -300,7 +301,7 @@ namespace Olive
             {
                 if (!existexml_carpetas(Nombre_Carpeta.Text))
                 {
-                    xml_crea_carpeta_favoritos(Nombre_Carpeta.Text.ToString());//insertamos en xml main
+                    xml_crea_carpeta_favoritos(Nombre_Carpeta.Text);//insertamos en xml main
                     CrearXml(ruta_Archivos, Nombre_Carpeta.Text);//creamos archivo nuevo.
                 }
                 //insertamos en archivo de la carpeta correspondiente
@@ -308,7 +309,7 @@ namespace Olive
 
             }
 
-            MessageBox.Show(nombre + Nombre_Carpeta.Text);
+          //  MessageBox.Show(nombre + Nombre_Carpeta.Text);
            // CrearFavorito(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Archivos + ruta_favo));
            // Muestra_favoritos(ruta_Archivos + ruta_favo);
         }
@@ -540,15 +541,15 @@ namespace Olive
             try
             {
                 XmlDoc = new XmlDocument();
-                XmlDoc.Load(ruta_Archivos + Main_xmlCarpeta);
+                XmlDoc.Load(ruta_Archivos+Main_xmlCarpeta);
                 Raiz = XmlDoc.DocumentElement;
                 ident = Raiz; // las transacciones quedarán en las exitosas  
-                XmlElement NuevaTransaccion = XmlDoc.CreateElement("Files"); //Como vamos a llamar el nuevo nodo  
+                XmlElement NuevaTransaccion = XmlDoc.CreateElement("File"); //Como vamos a llamar el nuevo nodo  
                 NuevaTransaccion.InnerXml = "<Nombre></Nombre>"; // Este es el contenido que va a tener el nuevo nodo  
                 NuevaTransaccion.AppendChild(XmlDoc.CreateWhitespace("\r\n"));
                 NuevaTransaccion["Nombre"].InnerText = Nombre;
                 ident.InsertAfter(NuevaTransaccion, ident.LastChild);
-                XmlTextWriter EscribirRec = new XmlTextWriter((ruta_Archivos + Main_xmlCarpeta), System.Text.Encoding.UTF8);
+                XmlTextWriter EscribirRec = new XmlTextWriter(ruta_Archivos + Main_xmlCarpeta, System.Text.Encoding.UTF8);
                 XmlDoc.WriteTo(EscribirRec);
                 EscribirRec.Close();
                 return true;
