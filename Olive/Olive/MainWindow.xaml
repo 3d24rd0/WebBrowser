@@ -1,0 +1,164 @@
+﻿<Window x:Class="Olive.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:me="clr-namespace:Olive.Properties"
+        Title="Olive" Height="574.8" Width="820.2" KeyDown="Pulsateclas">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Grid.Row="0">
+            <TabControl Name="Pestañas" ItemsSource="{Binding}" 
+                    SelectionChanged="Tab_change"
+                    MouseLeftButtonUp="Pestañas_MouseLeftButtonUp"
+                    KeyUp="Pestañas_KeyUp_1">
+            <TabControl.Resources>
+                <DataTemplate x:Key="Plant_tabs" DataType="TabItem">
+                    <DockPanel>
+                        <Button Name="Button_close" DockPanel.Dock="Right" Margin="5,0,0,0" Padding="0" Click="Button_Close_Click" 
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Name}" 
+                                Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}">
+                            <Image Source="/Theme/delete.gif" Height="10" Width="10" DockPanel.Dock="Right"></Image>
+                        </Button>
+                        <!--Texto de las pestañas -->
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=TabItem }, Path=Header}" />
+                    </DockPanel>
+                </DataTemplate>
+            </TabControl.Resources>
+            </TabControl>
+        </ScrollViewer>
+        
+        <Grid Name="GCuerpo" Grid.Row="1" Background="DarkSlateGray">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Name="Botones" Grid.Column="0" Panel.ZIndex="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions >
+                    <Button Name="Badelante" Grid.Column="0" HorizontalAlignment="Center" Click="Badelante_Click_1">
+                        <Label Name="adelante" >Adelante</Label>
+                    </Button>
+                    <Button Name="Batras1" Grid.Column="1" HorizontalAlignment="Center" Click="Batras" Panel.ZIndex="2">
+                        <Label Name="atras">Atras</Label>
+                    </Button>
+                    <ComboBox Name="UltVisitas" Grid.Column="2" Panel.ZIndex="2"/>
+                </Grid>
+                <Grid Name="Url" Grid.Column="1" Margin="10,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" x:Name="ComboHistorial" IsEditable="True" StaysOpenOnEdit="True" 
+                              KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0"
+                              SelectionChanged="ComboFavoritos_SelectionChanged_1"
+                              VerticalAlignment="Center">
+                        
+                    </ComboBox>
+                    <ComboBox Width="10" Grid.Column="1" Margin="5,5,5,5">
+                        <Grid Width="Auto" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Name="TitleF" Grid.Row="0" Margin="5,5,5,5">Añadir a Favoritos</TextBox>
+                            <Grid Background="Gray" Grid.Row="1" Margin="5,5,5,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Name="NombreF" Grid.Column="0" Grid.Row="0" Margin="5,5,5,5">Nombre:</TextBlock>
+                                <TextBox Name="Nombre_Nombre" Grid.Column="1" Grid.Row="0" Margin="5,5,5,5"/>
+                                <TextBlock Name="CarpetaF" Grid.Column="0" Grid.Row="1" Margin="5,5,5,5">Carpeta:</TextBlock>
+                                <TextBox Name="Nombre_Carpeta" Grid.Column="1" Grid.Row="1" Margin="5,5,5,5"/>
+                            </Grid>
+                            <Grid Grid.Row="2" Margin="5,5,5,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Name="EliminarF" Grid.Column="0" Margin="10,0,0,0" Click="EliminarF_Click_1">Eliminar</Button>
+                                <Button Name="OkF" Grid.Column="1" Width="Auto" Margin="100,0,0,0" Click="OkF_Click_1">OK</Button>
+                            </Grid>
+                        </Grid>
+                    </ComboBox>
+                </Grid>
+                <Grid Name="GBusca" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="Busca" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBox.Template>
+                            <ControlTemplate>
+                                <Grid Background="White" Margin="5,5,0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ScrollViewer x:Name="PART_ContentHost" Grid.Column="0" />
+                                        <Border x:Name="PART_SearchIconBorder"
+                                              Grid.Column="1"
+                                              BorderThickness="1"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalAlignment="Stretch">
+                                            <Image x:Name="SearchIcon"
+                                               Stretch="None"
+                                               Width="15"
+                                               Height="15" 
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Source="/Theme/search.png" MouseLeftButtonUp="SearchIcon_MouseLeftButtonUp_1"/>
+                                        </Border>   
+                                </Grid>
+                            </ControlTemplate>
+
+                        </TextBox.Template>
+                    </TextBox>
+                   
+                </Grid>
+                <Grid Name="Gbutonsher" Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="BotonHome" Grid.Column="0" Width="20" Click="BotonHome_Click_1" Margin="10,0,0,0"/>
+                    <Button Name="BotonHerramientas" Grid.Column="1" Width="20" Margin="10,0,0,0"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <DockPanel Name="favoritos" Grid.Row="2" Background="Gray">
+            <Separator Background="Gray"></Separator>
+        </DockPanel>
+        
+        
+        <Grid Name="navegas" Grid.Row="3" >
+        </Grid>
+
+
+    </Grid>
+</Window>
