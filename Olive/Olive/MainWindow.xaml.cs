@@ -584,7 +584,7 @@ namespace Olive
             Boolean segundo = false;
             XmlTextReader reader = new XmlTextReader(archivo);
             ComboHistorial.Items.Clear();//Limpia antes de llenar.
-            MessageBox.Show(archivo);
+            //MessageBox.Show(archivo);
             while (reader.Read())
             {
                 switch (reader.NodeType)
