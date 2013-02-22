@@ -331,7 +331,7 @@ namespace Olive
                     CrearXml(ruta_Archivos, Nombre_Carpeta.Text);//creamos archivo nuevo.
                 }
                 //insertamos en archivo de la carpeta correspondiente
-                CrearFavorito(nombre, Motor[Pestañas.SelectedIndex].geturl().ToString(),(ruta_Archivos + Nombre_Carpeta.Text));
+                CrearFavorito(nombre, Motor[Pestañas.SelectedIndex].geturl().ToString(),(ruta_Archivos + Nombre_Carpeta.Text+".xml"));
 
             }
 
@@ -427,7 +427,7 @@ namespace Olive
         {
             try
             {
-                if (Nombre_archivo != "")
+                if (Nombre_archivo.Equals("Favoritos.xml") || Nombre_archivo.Equals("Historial.xml") || Nombre_archivo.Equals("MainCarpetas.xml"))
                 {
                     if (Ruta_archivo == "../../Configuracion/ArchivosXml/Favoritos.xml")
                     {
@@ -473,7 +473,7 @@ namespace Olive
                 }
                 else
                 {
-                    XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo + Nombre_archivo, System.Text.Encoding.UTF8);
+                    XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo + Nombre_archivo+".xml", System.Text.Encoding.UTF8);
                     EscribirRec.Formatting = Formatting.Indented;
                     EscribirRec.Indentation = 2;
                     EscribirRec.WriteStartDocument(false);
