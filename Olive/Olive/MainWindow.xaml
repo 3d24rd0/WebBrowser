@@ -67,7 +67,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0" x:Name="ComboFavoritos" IsEditable="True" StaysOpenOnEdit="True" 
+                        <ComboBox Grid.Column="0" x:Name="ComboHistorial" IsEditable="True" StaysOpenOnEdit="True" 
                               KeyDown="TextoUrl_KeyDown" Panel.ZIndex="0"
                               SelectionChanged="ComboFavoritos_SelectionChanged_1"
                               VerticalAlignment="Center">

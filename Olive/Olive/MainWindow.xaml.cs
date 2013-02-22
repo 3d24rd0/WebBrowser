@@ -29,7 +29,7 @@ namespace Olive
         private string ruta_Archivos = "../../Configuracion/ArchivosXml/";
         private string ruta_favo = "Favoritos.xml";
         private string ruta_Histo = "Historial.xml";
-        private string Main_xmlCarpeta = "MainCarpetas.xml";
+        private string Main_xmlCarpeta = "Carpetas.xml";
         private string ultimapaginavisitada = "Olive";
 
         public MainWindow()
@@ -39,10 +39,11 @@ namespace Olive
                 _tabs = new List<TabItem>();//Iniciar array _tabs
                 TabAdding();//Agregamos la pestaña de crear mas.
                 this.AddTabItem();//Agregamos la primera pestaña normal
+
                 comprobarArchivosXML(ruta_favo, ruta_Archivos);
                 comprobarArchivosXML(ruta_Histo, ruta_Archivos);
                 comprobarArchivosXML(Main_xmlCarpeta, ruta_Archivos);
-                Muestra_Istorial(ruta_Archivos + ruta_Histo);
+                Muestra_HIstorial(ruta_Archivos + ruta_Histo);
             }
             catch (Exception ex)
             {
@@ -149,7 +150,7 @@ namespace Olive
                     {
                         navegas.Children.Clear();
                         navegas.Children.Add(Motor[Pestañas.SelectedIndex].getbrouser());
-                        ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
+                        ComboHistorial.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
                     }
                     catch { }
                 }
@@ -234,8 +235,8 @@ namespace Olive
         }
         private void ComboFavoritos_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show("lol" + ComboFavoritos.SelectedIndex.ToString());
-            char[] a = ComboFavoritos.SelectedItem.ToString().ToCharArray();
+            //MessageBox.Show("lol" + ComboHistorial.SelectedIndex.ToString());
+            char[] a = ComboHistorial.SelectedItem.ToString().ToCharArray();
             Boolean estas = false;
             string temp = "";
             for(int o = 0; o < a.Length; o++)
@@ -328,7 +329,7 @@ namespace Olive
                 if (!existexml_carpetas(Nombre_Carpeta.Text))
                 {
                     xml_crea_carpeta_favoritos(Nombre_Carpeta.Text);//insertamos en xml main
-                    CrearXml(ruta_Archivos, Nombre_Carpeta.Text);//creamos archivo nuevo.
+                    CrearXml(ruta_Archivos, Nombre_Carpeta.Text+".xml");//creamos archivo nuevo.
                 }
                 //insertamos en archivo de la carpeta correspondiente
                 CrearFavorito(nombre, Motor[Pestañas.SelectedIndex].geturl().ToString(),(ruta_Archivos + Nombre_Carpeta.Text+".xml"));
@@ -368,7 +369,7 @@ namespace Olive
         {
             try
             {
-                ComboFavoritos.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
+                ComboHistorial.Text = Motor[Pestañas.SelectedIndex].geturl().ToString();
                 CrearHistorial(Motor[Pestañas.SelectedIndex].getName(), Motor[Pestañas.SelectedIndex].geturl().ToString(), (ruta_Archivos + ruta_Histo));
             }
             catch { }
@@ -377,12 +378,11 @@ namespace Olive
         #region xml
         public void comprobarArchivosXML(string ArchivoXml, String ruta)
         {
-            ArchivoXml = ruta + ArchivoXml;
             if (CrearCarpetaXml(ruta))
             {
-                if (!ArchivoExiste(ArchivoXml))
+                if (!ArchivoExiste(ruta + ArchivoXml))
                 {
-                    CrearXml(ArchivoXml,"");
+                    CrearXml(ruta, ArchivoXml);
                 }
             }
         }
@@ -427,11 +427,9 @@ namespace Olive
         {
             try
             {
-                if (Nombre_archivo.Equals("Favoritos.xml") || Nombre_archivo.Equals("Historial.xml") || Nombre_archivo.Equals("MainCarpetas.xml"))
-                {
-                    if (Ruta_archivo == "../../Configuracion/ArchivosXml/Favoritos.xml")
+                    if (Nombre_archivo.Equals("Favoritos.xml"))
                     {
-                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo, System.Text.Encoding.UTF8);
+                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo + Nombre_archivo, System.Text.Encoding.UTF8);
                         EscribirRec.Formatting = Formatting.Indented;
                         EscribirRec.Indentation = 2;
                         EscribirRec.WriteStartDocument(false);
@@ -442,9 +440,9 @@ namespace Olive
                         EscribirRec.Close();
                         return true;
                     }
-                    if (Ruta_archivo == "../../Configuracion/ArchivosXml/Historial.xml")
+                    if (Nombre_archivo.Equals("Historial.xml"))
                     {
-                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo, System.Text.Encoding.UTF8);
+                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo + Nombre_archivo, System.Text.Encoding.UTF8);
                         EscribirRec.Formatting = Formatting.Indented;
                         EscribirRec.Indentation = 2;
                         EscribirRec.WriteStartDocument(false);
@@ -455,11 +453,9 @@ namespace Olive
                         EscribirRec.Close();
                         return true;
                     }
-
-
-                    if (Ruta_archivo == "../../Configuracion/ArchivosXml/MainCarpetas.xml")
+                    if (Nombre_archivo.Equals("Carpetas.xml"))
                     {
-                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo, System.Text.Encoding.UTF8);
+                        XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo + Nombre_archivo, System.Text.Encoding.UTF8);
                         EscribirRec.Formatting = Formatting.Indented;
                         EscribirRec.Indentation = 2;
                         EscribirRec.WriteStartDocument(false);
@@ -470,22 +466,17 @@ namespace Olive
                         EscribirRec.Close();
                         return true;
                     }
-                }
-                else
-                {
-                    XmlTextWriter EscribirRec = new XmlTextWriter(Ruta_archivo + Nombre_archivo+".xml", System.Text.Encoding.UTF8);
-                    EscribirRec.Formatting = Formatting.Indented;
-                    EscribirRec.Indentation = 2;
-                    EscribirRec.WriteStartDocument(false);
-                    EscribirRec.WriteComment("Lista de Carpetas Contenedoras de favoritos");
-                    EscribirRec.WriteStartElement("Carpeta");
-                    EscribirRec.WriteEndElement();
-                    EscribirRec.WriteEndDocument();
-                    EscribirRec.Close();
+                
+                    XmlTextWriter EscribirRec1 = new XmlTextWriter(Ruta_archivo + Nombre_archivo, System.Text.Encoding.UTF8);
+                    EscribirRec1.Formatting = Formatting.Indented;
+                    EscribirRec1.Indentation = 2;
+                    EscribirRec1.WriteStartDocument(false);
+                    EscribirRec1.WriteComment("Lista de Carpetas Contenedoras de favoritos");
+                    EscribirRec1.WriteStartElement("Carpeta");
+                    EscribirRec1.WriteEndElement();
+                    EscribirRec1.WriteEndDocument();
+                    EscribirRec1.Close();
                     return true;
-
-                }
-                return false;
             }
             catch
             {
@@ -585,14 +576,15 @@ namespace Olive
                 return false;
             }
         }
-        public void Muestra_Istorial(string archivo)
+        public void Muestra_HIstorial(string archivo)
         {
             String nombre = "";
             String Url = "";
             Boolean primero = false;
             Boolean segundo = false;
             XmlTextReader reader = new XmlTextReader(archivo);
-            ComboFavoritos.Items.Clear();//Limpia antes de llenar.
+            ComboHistorial.Items.Clear();//Limpia antes de llenar.
+            MessageBox.Show(archivo);
             while (reader.Read())
             {
                 switch (reader.NodeType)
@@ -610,18 +602,20 @@ namespace Olive
                         }
                         if (primero == true && segundo == true)
                         {
-                            ComboFavoritos.Items.Add(nombre + "\n" + Url);
+                            ComboHistorial.Items.Add(nombre + "\n" + Url);
                             primero = false;
                             segundo = false;
                         }
                         break;
                 }
+                
             }
+            reader.Close();
         }
   
         public Boolean existexml_carpetas(String nombre)
         {
-            XmlTextReader reader = new XmlTextReader("../../Configuracion/ArchivosXml/MainCarpetas.xml");
+            XmlTextReader reader = new XmlTextReader("../../Configuracion/ArchivosXml/Carpetas.xml");
             while (reader.Read())
             {
                 switch (reader.NodeType)
@@ -637,6 +631,7 @@ namespace Olive
                         break;
                 }
             }
+            reader.Close();
             return false;
         }
         #endregion xml
